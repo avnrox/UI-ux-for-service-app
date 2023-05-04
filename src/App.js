@@ -16,35 +16,71 @@ import { ServiceDetailAndChatUserSide } from './components/ServiceDetailAndChatU
 // import {ServiceRequest} from "./components/ServiceRequest";
 import { Sidebar, Menu, MenuItem, SubMenu, ProSidebarProvider } from 'react-pro-sidebar';
 import { ServiceDetailAndChatServiceProviderSide } from './components/ServiceDetailAndChatServiceProviderSide';
-import { Serviceslogo, Navbar} from './components';
-import { Footer, Blog, Features, Services, Header } from './containers';
+import { Serviceslogo, Navbar, Servicenavbar} from './components';
+import { Footer, Blog, Features, Services, Header, Firstheader } from './containers';
 
 
 function App() {
   return (
     // <Router>
     <div className="App">
-      <div className="gradient__bg">
-        <Navbar />
-        <Header />
-      </div>
-        <Serviceslogo />
-        <Services />
-        <Features />
-        <Blog />
-        <Footer />
+      
         <ProSidebarProvider>
      <Routes>
-          <Route path="/" Component={Register} />
+          <Route path="/" element={
+            <>
+            <div className="gradient__bg">
+            <Firstheader/>
+            </div>
+            <Register/>
+            <Serviceslogo />
+            </>
+          } />
           <Route path="/login" Component={Login}/>
-          <Route path="/register" Component={Register}/>
-          <Route path="/home" Component={Home} />
+          <Route path="/register" element={
+            <>
+            <div className="gradient__bg">
+            <Firstheader/>
+            </div>
+            <Register/>
+            <Serviceslogo />
+            </>
+          } />
+          <Route path="/home" Component={Home} /> 
+          {/* make a home page nothing exists yet */}
           <Route path="/userregister" Component={UserRegister} />
           <Route path="/serviceproviderregister" Component={ServiceProviderRegister}/>
-          <Route path="/userhome" Component={UserHome}/>
+          {/* <Route path="/userhome" Component={UserHome}/> */}
+          {/* NEED TO MAKE A PAGE THAT SHOWS THE RESULT OF SELECTED OPTIONS IN USER HOME */}
+          <Route path="/userhome" element={
+            <>
+            <div className="gradient__bg">
+              <Navbar />
+              <Header/>
+            </div>
+            <Serviceslogo />
+            <Services />
+            <Features />
+            <Blog />
+            <Footer />
+            </>
+          } />
           <Route path="/userlogin" Component={UserLogin}/>
           <Route path="/serviceproviderlogin" Component={ServiceProviderLogin}/>
-          <Route path="serviceproviderhome" Component={ServiceProviderHome}/>
+          {/* <Route path="serviceproviderhome" Component={ServiceProviderHome}/> */}
+          <Route path="/serviceproviderhome" element={
+            <>
+            <div className="gradient__bg">
+              <Servicenavbar />
+              <Header/>
+            </div>
+            <Serviceslogo />
+            <Services />
+            <Features />
+            <Blog />
+            <Footer />
+            </>
+          } />
           <Route path="/servicerequestuserside" Component={ServiceRequestUserSide}/>
           <Route path="/userprofile" Component={UserProfile}/>
           <Route path="/servicedetailsandchatuserside" Component={ServiceDetailAndChatUserSide}/>

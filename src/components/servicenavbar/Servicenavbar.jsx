@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import logo from '../../assets/logo.svg';
-import './navbar.css';
+import './servicenavbar.css';
 
-const Navbar = () => {
+const Servicenavbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
@@ -16,6 +16,7 @@ const Navbar = () => {
           <p><a href="#home">Home</a></p>
           <p><a href="#wseva">Services</a></p>
           <p><a href="#features">Orders</a></p>
+          <p><a href='#newpagelink'>Add Service</a></p>
           <p><a href="#blog">News</a></p>
         </div>
       </div>
@@ -33,6 +34,7 @@ const Navbar = () => {
             <p><a href="#home">Home</a></p>
             <p><a href="#wseva">Services</a></p>
             <p><a href="#features">Orders</a></p>
+            <p><a href='#newpagelink'>Add Service</a></p>
             <p><a href="#blog">News</a></p>
           </div>
           <div className="seva__navbar-menu_container-links-sign">
@@ -46,4 +48,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Servicenavbar;

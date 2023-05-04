@@ -1,5 +1,5 @@
 import React from 'react';
-import hoomans from '../../assets/humans.png';
+//import hoomans from '../../assets/humans.png';
 import comunity from '../../assets/comunity2.png';
 import './header.css';
 
@@ -18,12 +18,13 @@ const Header = () => (
         <option value="Plumbing">Plumbing</option>
         <option value="Beuty">Beuty</option>
         </select>
+        <select>
+        <option value="Southampton1">Southampton Central</option>
+        <option value="Southampton2">Area 2</option>
+        <option value="Southampton 3">Area 3</option>
+        </select>
         <button type="button">Search</button>
       </div>
-    </div>
-    <div className="gpt3__header-content__people">
-      <img src={hoomans} alt='people'/>
-      <p>1,600 people requested access a visit in last 24 hours</p>
     </div>
 
     <div className="seva__header-image">

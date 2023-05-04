@@ -87,10 +87,10 @@ const ImageMarked = styled('span')(({ theme }) => ({
 export const Register = () => {
   const navigate = useNavigate()
   const handleUserClick = () => {
-    navigate('UserLogin');
+    navigate('/UserLogin');
   };
   const handleServiceProviderClick = () => {
-    navigate('ServiceProviderLogin');
+    navigate('/ServiceProviderLogin');
   };
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
