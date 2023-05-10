@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
 
 
 function Copyright(props) {
@@ -32,17 +34,33 @@ const theme = createTheme();
 
 
 export const UserLogin = () => { 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
+
+  const [user,setUser] = useState({
+    user_id:"",
+    user_pwd:""
+  })
+
+  const{user_id, user_pwd}=user
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   username: data.get('username'),
+    //   password: data.get('password'),
+    // });
+    await axios.post("http://localhost:8082/users/login",user)
+  
     navigate('/UserHome')
   };
+ 
 
-  const navigate = useNavigate();
+  const onInputChange  = (e) => {
+      setUser({...user,[e.target.name]:e.target.value})
+
+  }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -83,21 +101,25 @@ export const UserLogin = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="username"
+                id="user_id"
                 label="Username"
-                name="username"
+                name="user_id"
                 autoComplete="username"
                 autoFocus
+                value={user_id}
+                onChange={(e) => onInputChange(e)}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="user_pwd"
                 label="Password"
                 type="password"
-                id="password"
+                id="user_pwd"
                 autoComplete="current-password"
+                value={user_pwd}
+                onChange={(e) => onInputChange(e)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}

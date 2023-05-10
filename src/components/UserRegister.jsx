@@ -48,6 +48,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -65,16 +67,32 @@ function Copyright(props) {
 const theme = createTheme();
 
 export const UserRegister = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
+
+  const [user,setUser] = useState({
+    username:"",
+    password:""
+  })
+
+  const{username, password}=user
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   username: data.get('username'),
+    //   password: data.get('password'),
+    // });
+    await axios.post("http://localhost:8082/users/register",user)
+  
     navigate('/UserHome')
   };
-  const navigate = useNavigate();
+ 
+
+  const onInputChange  = (e) => {
+      setUser({...user,[e.target.name]:e.target.value})
+
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -96,7 +114,7 @@ export const UserRegister = () => {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -116,7 +134,7 @@ export const UserRegister = () => {
                   name="lastName"
                   autoComplete="family-name"
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -125,6 +143,8 @@ export const UserRegister = () => {
                   label="Username"
                   name="username"
                   autoComplete="Username"
+                  value={username}
+                  onChange={(e) => onInputChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -136,14 +156,16 @@ export const UserRegister = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => onInputChange(e)}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button
               type="submit"

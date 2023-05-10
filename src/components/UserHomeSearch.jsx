@@ -51,6 +51,8 @@ import TableRow from '@mui/material/TableRow';
 import { Link, useHistory } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { Button } from '@mui/material';
+import { useEffect } from 'react';
+import axios, { Axios } from 'axios';
 
 
 
@@ -100,10 +102,19 @@ const columns = [
   ];
 
 
-export const UserHome = () => {
+export const UserHomeSearch = () => {
     
     const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [users, setUsers] = React.useState([]);
+  useEffect(() => {
+    loadUsers();
+  },[]);
+  
+  const loadUsers = async () => {
+    const result = await axios.get("http://localhost:8082/service/user_list");
+    console.log(result.data);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

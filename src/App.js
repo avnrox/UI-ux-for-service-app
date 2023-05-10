@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { UserRegister } from './components/UserRegister';
 import { ServiceProviderRegister } from './components/ServiceProviderRegister';
-import { UserHome } from './components/UserHome';
+import { UserHomeSearch } from './components/UserHomeSearch';
 import { ServiceProviderHome } from './components/ServiceProviderHome';
 import { UserLogin } from "./components/UserLogin";
 import { ServiceProviderLogin } from "./components/ServiceProviderLogin";
@@ -18,6 +18,7 @@ import { Sidebar, Menu, MenuItem, SubMenu, ProSidebarProvider } from 'react-pro-
 import { ServiceDetailAndChatServiceProviderSide } from './components/ServiceDetailAndChatServiceProviderSide';
 import { Serviceslogo, Navbar, Servicenavbar} from './components';
 import { Footer, Blog, Features, Services, Header, Firstheader } from './containers';
+import { Axios } from 'axios';
 
 
 function App() {
@@ -50,8 +51,9 @@ function App() {
           {/* make a home page nothing exists yet */}
           <Route path="/userregister" Component={UserRegister} />
           <Route path="/serviceproviderregister" Component={ServiceProviderRegister}/>
-          {/* <Route path="/userhome" Component={UserHome}/> */}
-          {/* NEED TO MAKE A PAGE THAT SHOWS THE RESULT OF SELECTED OPTIONS IN USER HOME */}
+          <Route path="/userhomesearch" Component={UserHomeSearch}/>
+          {/* NEED TO MAKE A PAGE THAT SHOWS THE RESULT OF SELECTED OPTIONS IN USER HOME 
+          =====> USERHOMESEARCH IS THAT PAGE. ONCLICK OF SEARCH, WE NAVIGATE TO THAT PAGE*/}
           <Route path="/userhome" element={
             <>
             <div className="gradient__bg">
@@ -72,11 +74,11 @@ function App() {
             <>
             <div className="gradient__bg">
               <Servicenavbar />
-              <Header/>
+              {/* <Header/> */}
             </div>
             <Serviceslogo />
-            <Services />
             <Features />
+            <Services />
             <Blog />
             <Footer />
             </>
