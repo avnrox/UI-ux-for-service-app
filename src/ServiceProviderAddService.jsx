@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,  useEffect  } from "react";
 import { useNavigate } from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
 import { TextField, FormControl, Button } from "@mui/material";
@@ -28,11 +28,22 @@ const theme = createTheme();
 
 export const ServiceProviderAddService = () => {
     // const theme = createTheme();
-    const [startDate, setStartDate] = useState(new Date());
-    const [description, setDescription] = useState("");
-    const [prices, setPrices] = useState("");
-    const [availability, setAvailability] = useState("");
-    const [area, setArea] = useState("");
+    // const [startDate, setStartDate] = useState(new Date());
+    // const [description, setDescription] = useState("");
+    // const [prices, setPrices] = useState("");
+    // const [availability, setAvailability] = useState("");
+    // const [area, setArea] = useState("");
+
+    const [service,setService] = useState({
+      serviceDescription:"",
+      price:"",
+      availability:"",
+      serviceArea:"",
+      providerEmail:"",
+      providerId: "",
+      serviceCategory:""
+    })
+    const{serviceDescription, price, availability, serviceArea, providerEmail, providerId, serviceCategory}=service
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -45,11 +56,25 @@ export const ServiceProviderAddService = () => {
         // });
         navigate('/ServiceProviderHome')
       };
-
+        // user_id="+user_id+"&user_pwd="+user_pwd
       const handleOnClick = async (e) => {
         e.preventDefault();
-        console.log("data : ", description, prices, availability, area); 
-        // await axios.post("http://localhost:8082/service/save?)
+        console.log("data : ", service); 
+        await axios.post("http://localhost:8082/service/save?", service)
+        .then((response) => {
+          console.log(response.data)
+          // localStorage.setItem("token",response.data.token)
+          // localStorage.setItem("user_id",response.data.user_id)
+          console.log("provider_id",localStorage.getItem("provider_id"))
+          // localStorage.setItem("user_name",response.data.user_name)
+          // localStorage.setItem("user_email",response.data.user_email)
+          // localStorage.setItem("user_mobile",response.data.user_mobile)
+          // localStorage.setItem("user_role",response.data.user_role)
+          // localStorage.setItem("user_status",response.data.user_status)
+          // localStorage.setItem("user_created_at",response.data.user_created_at)
+          // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+        
+        })
         navigate('/serviceproviderhome');
         
         };
@@ -80,12 +105,68 @@ export const ServiceProviderAddService = () => {
             name: 'Leeds',
           },
         ];
+
+        const categories = [
+          {
+            id: 1,
+            name: 'Cleaning',
+          },
+          {
+            id: 2,
+            name: 'Baby Sitting',
+          },
+          {
+            id: 3,
+            name: 'Pest Control',
+          },
+          {
+            id: 4,
+            name: 'Electrical Repair',
+          },
+          {
+            id: 5,
+            name: 'Plumbing',
+          },
+          {
+            id: 6,
+            name: 'Beauty',
+          },
+        ];
         
     const navigate = useNavigate();
 
+    useEffect(() => {
+      // Get the values from local storage
+      
+      const storedProviderEmail = localStorage.getItem("provider_id");
+      const storedProviderId = localStorage.getItem('provider_id');
+      
+      // Set the values in the state
+      setService((prevState) => ({
+        ...prevState,
+        providerEmail: storedProviderEmail,
+        providerId: storedProviderId,
+      }));
+    }, []);
+
+    const onInputChange = (e) => {
+      const { name, value } = e.target;
+      console.log("test", name, value);
+      setService({ ...service, [name]: value });
+    };
+
+    // const getData = async (e) => {
+    //   e.preventDefault();
+    //   var id = localStorage.getItem('provider_id');
+    //   console.log("data from localstorage : ", id); 
+    //   };
+
 
     return (
+      
         <div>
+          {/* <Button variant="contained" color="success" onClick={getData}>
+            </Button> */}
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -104,15 +185,17 @@ export const ServiceProviderAddService = () => {
                 <TextField
                 required
                 fullWidth
-                name="description"
+                name="serviceDescription"
                 id="outlined-multiline-static"
                 label="Description"
                 // value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
                 multiline
                 rows={10}
                 // defaultValue="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                // value={description}
+                // onChange={(e) => setDescription(e.target.value)}
+                value={serviceDescription}
+                  onChange={(e) => onInputChange(e)}
                 />
               </Grid>
             
@@ -125,13 +208,13 @@ export const ServiceProviderAddService = () => {
                 <TextField
                   required
                   fullWidth
-                  name="prices"
+                  name="price"
                   label="prices"
                   // type=""
-                  id="prices"
+                  id="price"
                   autoComplete="prices"
-                  value={prices}
-                  onChange={(e) => setPrices(e.target.value)}
+                  value={price}
+                  onChange={(e) => onInputChange(e)}
                 />
                 </Grid>
                 </Grid>
@@ -145,17 +228,25 @@ export const ServiceProviderAddService = () => {
                   id="availability"
                   autoComplete="availability"
                   value={availability}
-                  onChange={(e) => setAvailability(e.target.value)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 </Grid>
                 <Grid item xs={12}>
-  <select value={area} onChange={(e) => setArea(e.target.value)}>
-    {areas.map((area) => (
-      <option key={area.id} value={area.name}>
-        {area.name}
-      </option>
-    ))}
-  </select>
+                <select name="serviceArea" value={serviceArea} onChange={onInputChange}>
+  {areas.map((area) => (
+    <option key={area.id} value={area.name}>
+      {area.name}
+    </option>
+  ))}
+</select>
+
+<select name="serviceCategory" value={serviceCategory} onChange={onInputChange}>
+  {categories.map((category) => (
+    <option key={category.id} value={category.name}>
+      {category.name}
+    </option>
+  ))}
+</select>
 </Grid>
               <Grid item xs={12}>
             

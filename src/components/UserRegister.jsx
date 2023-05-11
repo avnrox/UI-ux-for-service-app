@@ -1,38 +1,3 @@
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-
-// export const UserRegister = () => {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-
-//     const navigate = useNavigate()
-  
-//     const handleSubmit = (event) => {
-//       event.preventDefault();
-//       console.log(`Email: ${email}, Password: ${password}`);
-//       navigate("/UserHome")
-//     }
-
-//     return (
-//         <form onSubmit={handleSubmit}>
-//           <label>
-//             Email:
-//             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-//           </label>
-//           <br />
-//           <label>
-//             Password:
-//             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//           </label>
-//           <br />
-//           <button type="submit" onClick={handleSubmit}>Submit</button>
-//         </form>
-//     //    <div>
-//     //     <p>hi</p>
-//     //    </div>
-//       );
-//     }
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -69,11 +34,12 @@ const theme = createTheme();
 export const UserRegister = () => {
 
   const [user,setUser] = useState({
-    username:"",
-    password:""
+    userId:"",
+    userPwd:"",
+    email:""
   })
 
-  const{username, password}=user
+  const{userId, userPwd, email}=user
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -83,7 +49,21 @@ export const UserRegister = () => {
     //   username: data.get('username'),
     //   password: data.get('password'),
     // });
-    await axios.post("http://localhost:8082/users/register",user)
+    await axios.post("http://localhost:8082/users/register", user)
+    .then((response) => {
+      console.log(response.data)
+      // localStorage.setItem("token",response.data.token)
+      localStorage.setItem("user_id",response.data.user_id)
+      console.log("user_id",localStorage.getItem("user_id"))
+      // localStorage.setItem("user_name",response.data.user_name)
+      // localStorage.setItem("user_email",response.data.user_email)
+      // localStorage.setItem("user_mobile",response.data.user_mobile)
+      // localStorage.setItem("user_role",response.data.user_role)
+      // localStorage.setItem("user_status",response.data.user_status)
+      // localStorage.setItem("user_created_at",response.data.user_created_at)
+      // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+    
+    })
   
     navigate('/UserHome')
   };
@@ -91,8 +71,23 @@ export const UserRegister = () => {
 
   const onInputChange  = (e) => {
       setUser({...user,[e.target.name]:e.target.value})
-
+      const { name, value } = e.target;
+      if (name === "userId") {
+        setUser({
+          ...user,
+          userId: value,
+          email: value, // set email to the same value as userId
+        });
+      } else {
+        setUser({
+          ...user,
+          [name]: value,
+        });
+      }
+     
   }
+
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -139,11 +134,11 @@ export const UserRegister = () => {
                 <TextField
                   required
                   fullWidth
-                  id="username"
+                  id="userId"
                   label="Username"
-                  name="username"
+                  name="userId"
                   autoComplete="Username"
-                  value={username}
+                  value={userId}
                   onChange={(e) => onInputChange(e)}
                 />
               </Grid>
@@ -151,12 +146,12 @@ export const UserRegister = () => {
                 <TextField
                   required
                   fullWidth
-                  name="password"
+                  name="userPwd"
                   label="Password"
                   type="password"
-                  id="password"
+                  id="userPwd"
                   autoComplete="new-password"
-                  value={password}
+                  value={userPwd}
                   onChange={(e) => onInputChange(e)}
                 />
               </Grid>

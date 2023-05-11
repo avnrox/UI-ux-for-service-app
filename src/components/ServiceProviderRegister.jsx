@@ -1,49 +1,3 @@
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-
-
-// export const ServiceProviderRegister= () => {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [description, setDescription] = useState('');
-//     const [address, setAddress] = useState('');
-
-//     const navigate = useNavigate()
-  
-//     const handleSubmit = (event) => {
-//       event.preventDefault();
-//       console.log(`Email: ${email}, Password: ${password}, Description: ${description}, Address: ${address}`);
-//       navigate("/ServiceProviderHome")
-//     }
-    
-//     return (
-//         <form onSubmit={handleSubmit}>
-//         <label>
-//           Email:
-//           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-//         </label>
-//         <br />
-//         <label>
-//           Password:
-//           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//         </label>
-//         <br />
-//         <label>
-//           Description:
-//           <input type="textarea" value={description} onChange={(e) => setDescription(e.target.value)} />
-//         </label>
-//         <label>
-//           Address:
-//           <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
-//         </label>
-//         <button type="submit" onClick={handleSubmit}>Submit</button>
-//       </form>
-//         // <div>
-//         //    Service Provider Home
-//         // </div>
-//     )
-// }
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -59,6 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+// const onInputChange = (e) => {
+//   const { name, value } = e.target;
+//   console.log("test", name, value);
+//   setService({ ...service, [name]: value });
+// };
 
 function Copyright(props) {
   return (
@@ -75,19 +36,90 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
+
 export const ServiceProviderRegister = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-      description: data.get('description'),
-      address: data.get('address'),
-    });
+
+  const areas = [
+    {
+      id: 1,
+      name: 'Southampton',
+    },
+    {
+      id: 2,
+      name: 'London',
+    },
+    {
+      id: 3,
+      name: 'Manchester',
+    },
+    {
+      id: 4,
+      name: 'Birmingham',
+    },
+    {
+      id: 5,
+      name: 'Edinburgh',
+    },
+    {
+      id: 6,
+      name: 'Leeds',
+    },
+  ];
+
+  const [serviceprovider, setServiceProvider] = React.useState({
+    providerId:"",
+    providerPwd:"",
+    providerAdd:"",
+    description:""
+  })
+  
+  const{providerId, providerPwd, providerAdd, description}=serviceprovider
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   username: data.get('username'),
+    //   password: data.get('password'),
+    // });
+    await axios.post("http://localhost:8082/serviceprovider/register", serviceprovider)
+    .then((response) => {
+      console.log(response.data)
+      // localStorage.setItem("token",response.data.token)
+      localStorage.setItem("provider_id",response.data)
+      console.log("provider_id",localStorage.getItem("provider_id"))
+      // localStorage.setItem("user_name",response.data.user_name)
+      // localStorage.setItem("user_email",response.data.user_email)
+      // localStorage.setItem("user_mobile",response.data.user_mobile)
+      // localStorage.setItem("user_role",response.data.user_role)
+      // localStorage.setItem("user_status",response.data.user_status)
+      // localStorage.setItem("user_created_at",response.data.user_created_at)
+      // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+    
+    })
     navigate('/ServiceProviderHome')
-  };
+
+  }
   const navigate = useNavigate();
+
+  const onInputChange  = (e) => {
+    setServiceProvider({...serviceprovider,[e.target.name]:e.target.value})
+    const { name, value } = e.target;
+    if (name === "providerId") {
+      setServiceProvider({
+        ...serviceprovider,
+        providerId: value,
+        // email: value, // set email to the same value as userId
+      });
+    } else {
+      setServiceProvider({
+        ...serviceprovider,
+        [name]: value,
+      });
+    }
+   
+}
 
   return (
     <ThemeProvider theme={theme}>
@@ -134,21 +166,25 @@ export const ServiceProviderRegister = () => {
                 <TextField
                   required
                   fullWidth
-                  id="username"
+                  id="providerId"
                   label="Username"
-                  name="username"
+                  name="providerId"
                   autoComplete="Username"
+                  value={providerId}
+                  onChange={(e) => onInputChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
+                  name="providerPwd"
                   label="Password"
                   type="password"
-                  id="password"
+                  id="providerPwd"
                   autoComplete="new-password"
+                  value={providerPwd}
+                  onChange={(e) => onInputChange(e)}
                 />
               </Grid>
               
@@ -170,7 +206,9 @@ export const ServiceProviderRegister = () => {
                 label="Description"
                 multiline
                 rows={4}
-                defaultValue="Description"
+                value={description}
+                onChange={(e) => onInputChange(e)}
+                // defaultValue="Description"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -183,7 +221,7 @@ export const ServiceProviderRegister = () => {
                   id="address"
                   autoComplete="Address"
                 /> */}
-                <TextField
+                {/* <TextField
                 required
                 fullWidth
                 name="address"
@@ -192,7 +230,14 @@ export const ServiceProviderRegister = () => {
                 multiline
                 rows={4}
                 defaultValue="Address.. Maybe change to proper address type fields.. check notes on onedrive"
-                />
+                /> */}
+                <select name="providerAdd" value={providerAdd} onChange={onInputChange}>
+  {areas.map((area) => (
+    <option key={area.id} value={area.name}>
+      {area.name}
+    </option>
+  ))}
+</select>
               </Grid>
               <Grid item xs={12}>
                 {/* <FormControlLabel

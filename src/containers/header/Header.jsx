@@ -3,8 +3,13 @@ import React from 'react';
 import comunity from '../../assets/comunity2.png';
 import './header.css';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Header = () => {
+
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedArea, setSelectedArea] = useState('');
+
   const navigate = useNavigate();
   const categories = [
     {
@@ -66,6 +71,11 @@ const Header = () => {
     //   username: data.get('username'),
     //   password: data.get('password'),
     // });
+    // Store selected values in localStorage
+    localStorage.setItem('serviceCategory', selectedCategory);
+    localStorage.setItem('serviceArea', selectedArea);
+    console.log("data:", localStorage.getItem('serviceCategory'),  localStorage.getItem('serviceArea'));
+    // Perform search or other actions here
     navigate('/userhomesearch');
   };
   
@@ -82,23 +92,25 @@ const Header = () => {
         </p>
   
         <div className="seva__header-content__input">
-          <select>
-            {categories.map((category) => (
-              <option key={category.id} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-          <select>
-            {areas.map((area) => (
-              <option key={area.id} value={area.name}>
-                {area.name}
-              </option>
-            ))}
-          </select>
-          <button type="button" onClick={handleOnClick}>
-            Search
-          </button>
+        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+        <option value="">Select a category</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.name}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+      <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
+        <option value="">Select an area</option>
+        {areas.map((area) => (
+          <option key={area.id} value={area.name}>
+            {area.name}
+          </option>
+        ))}
+      </select>
+      <button type="button" onClick={handleOnClick}>
+        Search
+      </button>
         </div>
       </div>
   

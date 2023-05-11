@@ -339,11 +339,28 @@
 //   );
 // }
 
-import React from 'react';
+import React,  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 export const UserHomeSearch = () => {
+
+  const [servicelist, setservicelist] = useState([]);
+  const servicearea = localStorage.getItem("serviceArea");
+  const servicecategory = localStorage.getItem("serviceCategory");
+
+  useEffect(() => {
+    axios.get('http://localhost:8082?service_area='+servicearea+'&service_category='+servicecategory)
+      .then(response => {
+        setservicelist(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+
   const items = [
     {
       id: 1,
