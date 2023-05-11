@@ -6,7 +6,59 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const categories = [
+    {
+      id: 1,
+      name: 'Cleaning',
+    },
+    {
+      id: 2,
+      name: 'Baby Sitting',
+    },
+    {
+      id: 3,
+      name: 'Pest Control',
+    },
+    {
+      id: 4,
+      name: 'Electrical Repair',
+    },
+    {
+      id: 5,
+      name: 'Plumbing',
+    },
+    {
+      id: 6,
+      name: 'Beauty',
+    },
+  ];
+  const areas = [
+    {
+      id: 1,
+      name: 'Southampton',
+    },
+    {
+      id: 2,
+      name: 'London',
+    },
+    {
+      id: 3,
+      name: 'Manchester',
+    },
+    {
+      id: 4,
+      name: 'Birmingham',
+    },
+    {
+      id: 5,
+      name: 'Edinburgh',
+    },
+    {
+      id: 6,
+      name: 'Leeds',
+    },
+  ];
+  
   const handleOnClick = (event) => {
     event.preventDefault();
     // const data = new FormData(event.currentTarget);
@@ -16,7 +68,7 @@ const Header = () => {
     // });
     navigate('/userhomesearch');
   };
-
+  
   return (
     <div className="seva__header section__padding" id="home">
       <div className="seva__header-content">
@@ -28,32 +80,32 @@ const Header = () => {
           through our portal here. Using our web app you not only get cheap
           competitive prices but also help boost the local businesses.
         </p>
-
+  
         <div className="seva__header-content__input">
           <select>
-            <option value="Cleaning">Cleaning</option>
-            <option value="Baby sitting">Baby sitting</option>
-            <option value="Pest control">Pest control</option>
-            <option value="Electrical Repair">Electrical Repair</option>
-            <option value="Plumbing">Plumbing</option>
-            <option value="Beauty">Beauty</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
           </select>
           <select>
-            <option value="Southampton1">Southampton Central</option>
-            <option value="Southampton2">Area 2</option>
-            <option value="Southampton3">Area 3</option>
+            {areas.map((area) => (
+              <option key={area.id} value={area.name}>
+                {area.name}
+              </option>
+            ))}
           </select>
           <button type="button" onClick={handleOnClick}>
             Search
           </button>
         </div>
       </div>
-
+  
       <div className="seva__header-image">
         <img src={comunity} alt="connecting people" />
       </div>
     </div>
   );
-};
-
+}
 export default Header;

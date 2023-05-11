@@ -2,9 +2,23 @@ import React, { useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import logo from '../../assets/logo.svg';
 import './servicenavbar.css';
+import { useNavigate } from 'react-router-dom';
 
 const Servicenavbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOnClick = (event) => {
+    event.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   username: data.get('username'),
+    //   password: data.get('password'),
+    // });
+    navigate('/');
+    localStorage.removeItem('provider_id');
+    console.log("provider_id",localStorage.getItem("provider_id"))
+    };
 
   return (
     <div className="seva__navbar">
@@ -21,8 +35,8 @@ const Servicenavbar = () => {
         </div>
       </div>
       <div className="seva__navbar-sign">
-        <p>Sign Out</p>
-        <button type="button">Profile</button>
+       {/* <p>Sign Out</p> */}
+       <button type="button" onClick={handleOnClick}>Sign Out</button>
       </div>
       <div className="seva__navbar-menu">
         {toggleMenu

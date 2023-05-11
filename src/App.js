@@ -19,6 +19,7 @@ import { ServiceDetailAndChatServiceProviderSide } from './components/ServiceDet
 import { Serviceslogo, Navbar, Servicenavbar} from './components';
 import { Footer, Blog, Features, Services, Header, Firstheader } from './containers';
 import { Axios } from 'axios';
+import { ServiceProviderAddService } from './ServiceProviderAddService';
 
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
             <Serviceslogo />
             <Features />
             <Services />
+            <ServiceProviderHome />
             <Blog />
             <Footer />
             </>
@@ -87,6 +89,7 @@ function App() {
           <Route path="/userprofile" Component={UserProfile}/>
           <Route path="/servicedetailsandchatuserside" Component={ServiceDetailAndChatUserSide}/>
           <Route path="/servicedetailsandchatserviceproviderside" Component={ServiceDetailAndChatServiceProviderSide}/>
+          <Route path="/serviceprovideraddservice" Component={ServiceProviderAddService}/>
           {/* /* <Route path="/servicerequest" Component={ServiceRequest}/> */} 
         </Routes>
         </ProSidebarProvider>

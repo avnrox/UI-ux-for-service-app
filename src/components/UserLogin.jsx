@@ -54,12 +54,13 @@ export const UserLogin = () => {
     //   username: data.get('username'),
     //   password: data.get('password'),
     // });
-    console.log("hello,",user)
+    // console.log("hello,",user)
     await axios.post("http://localhost:8082/users/login?user_id="+user_id+"&user_pwd="+user_pwd)
     .then((response) => {
       console.log(response.data)
-      localStorage.setItem("token",response.data.token)
-      localStorage.setItem("user_id",response.data.user_id)
+      // localStorage.setItem("token",response.data.token)
+      localStorage.setItem("user_id",response.data)
+      console.log("user_id",localStorage.getItem("user_id"))
       // localStorage.setItem("user_name",response.data.user_name)
       // localStorage.setItem("user_email",response.data.user_email)
       // localStorage.setItem("user_mobile",response.data.user_mobile)

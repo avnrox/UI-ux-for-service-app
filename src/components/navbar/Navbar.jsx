@@ -2,9 +2,29 @@ import React, { useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import logo from '../../assets/logo.svg';
 import './navbar.css';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const navigate = useNavigate();
+  // const signOutLink = document.querySelector('.seva__navbar-sign');
+
+  // signOutLink.addEventListener('click', () => {
+  //   // redirect the user to the desired page
+  //   // window.location.href = 'http://localhost:3000/';
+  //   Navigate()
+  // });
+  const handleOnClick = (event) => {
+    event.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   username: data.get('username'),
+    //   password: data.get('password'),
+    // });
+    navigate('/');
+    localStorage.removeItem('user_id');
+    console.log("user_id",localStorage.getItem("user_id"))
+    };
 
   return (
     <div className="seva__navbar">
@@ -20,8 +40,8 @@ const Navbar = () => {
         </div>
       </div>
       <div className="seva__navbar-sign">
-        <p>Sign Out</p>
-        <button type="button">Profile</button>
+        {/* <p>Sign Out</p> */}
+        <button type="button" onClick={handleOnClick}>Sign Out</button>
       </div>
       <div className="seva__navbar-menu">
         {toggleMenu

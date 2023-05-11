@@ -1,41 +1,3 @@
-// import React, { useState } from 'react';
-// import { useNavigate } from "react-router-dom";
-
-
-
-// export const Login = () => {
-
-// const [username, setUsername] = useState('');
-//   const [password, setPassword] = useState('');
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     console.log('Username:', username);
-//         console.log('Password:', password);
-//     // Add your authentication logic here
-//   }
-//     const navigate = useNavigate()
-//     return (
-//         <div className='auth-form-container'>
-//         <form className="login-form" onSubmit={handleSubmit}>
-//       <label>
-//         Username:
-//         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-//       </label>
-//       <br />
-//       <label>
-//         Password:
-//         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//       </label>
-//       <br />
-//       <button type="submit" onClick={() => navigate('Home')}>Login</button>
-//     </form>
-//     <button className='link-btn' onClick={() => navigate('Register')}>Register here!</button>
-//     </div>
-//     )
-// }
-
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -51,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
 
 
 function Copyright(props) {
@@ -70,17 +34,46 @@ const theme = createTheme();
 
 
 export const ServiceProviderLogin = () => { 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
+
+  const [provider,setProvider] = useState({
+    provider_id:"",
+    provider_pwd:""
+  })
+
+  const{provider_id, provider_pwd}=provider
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   username: data.get('username'),
+    //   password: data.get('password'),
+    // });
+    await axios.post("http://localhost:8082/serviceprovider/login?provider_id="+provider_id+"&provider_pwd="+provider_pwd)
+    .then((response) => {
+      console.log(response.data)
+      // localStorage.setItem("token",response.data.token)
+      localStorage.setItem("provider_id",response.data)
+      console.log("provider_id",localStorage.getItem("provider_id"))
+      // localStorage.setItem("user_name",response.data.user_name)
+      // localStorage.setItem("user_email",response.data.user_email)
+      // localStorage.setItem("user_mobile",response.data.user_mobile)
+      // localStorage.setItem("user_role",response.data.user_role)
+      // localStorage.setItem("user_status",response.data.user_status)
+      // localStorage.setItem("user_created_at",response.data.user_created_at)
+      // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+    
+    })
+  
     navigate('/ServiceProviderHome')
   };
 
   const navigate = useNavigate();
+
+  const onInputChange  = (e) => {
+    setProvider({...provider,[e.target.name]:e.target.value})
+
+}
 
   return (
     <ThemeProvider theme={theme}>
@@ -121,21 +114,25 @@ export const ServiceProviderLogin = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="username"
+                id="provider_id"
                 label="Username"
-                name="username"
+                name="provider_id"
                 autoComplete="Username"
                 autoFocus
+                value={provider_id}
+                onChange={(e) => onInputChange(e)}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="provider_pwd"
                 label="Password"
                 type="password"
-                id="password"
+                id="provider_pwd"
                 autoComplete="current-password"
+                value={provider_pwd}
+                onChange={(e) => onInputChange(e)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
