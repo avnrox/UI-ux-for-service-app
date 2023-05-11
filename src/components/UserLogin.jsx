@@ -39,6 +39,10 @@ export const UserLogin = () => {
     user_id:"",
     user_pwd:""
   })
+  // const [user,setUser] = useState({
+  //   user_id:"",
+  //   user_pwd:""
+  // })
 
   const{user_id, user_pwd}=user
   const navigate = useNavigate();
@@ -50,7 +54,21 @@ export const UserLogin = () => {
     //   username: data.get('username'),
     //   password: data.get('password'),
     // });
-    await axios.post("http://localhost:8082/users/login",user)
+    console.log("hello,",user)
+    await axios.post("http://localhost:8082/users/login?user_id="+user_id+"&user_pwd="+user_pwd)
+    .then((response) => {
+      console.log(response.data)
+      localStorage.setItem("token",response.data.token)
+      localStorage.setItem("user_id",response.data.user_id)
+      // localStorage.setItem("user_name",response.data.user_name)
+      // localStorage.setItem("user_email",response.data.user_email)
+      // localStorage.setItem("user_mobile",response.data.user_mobile)
+      // localStorage.setItem("user_role",response.data.user_role)
+      // localStorage.setItem("user_status",response.data.user_status)
+      // localStorage.setItem("user_created_at",response.data.user_created_at)
+      // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+    
+    })
   
     navigate('/UserHome')
   };
