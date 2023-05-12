@@ -350,15 +350,28 @@ export const UserHomeSearch = () => {
   const servicearea = localStorage.getItem("serviceArea");
   const servicecategory = localStorage.getItem("serviceCategory");
 
-  useEffect(() => {
-    axios.get('http://localhost:8082?service_area='+servicearea+'&service_category='+servicecategory)
-      .then(response => {
-        setservicelist(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get('http://localhost:8082?service_area='+servicearea+'&service_category='+servicecategory)
+  //     .then(response => {
+  //       setservicelist(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }, []);
+
+  const [res, setRes] = useState([]);
+  const gettempdata = async (e) => {
+    e.preventDefault();
+    await axios.post('http://localhost:8082/service/search_by_area_category?service_area='+servicearea+'&service_category='+servicecategory)
+    .then((response) => {
+      console.log(response.data);
+      setRes(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  };
 
 
   const items = [
@@ -399,25 +412,52 @@ export const UserHomeSearch = () => {
   ];
 
   return (
-    <ul style={{ color: 'white' }}>
-    {items.map(item => (
-      // <Link to={`/item/${item.id}`} key={item.id}>
-      <Link to={`/servicerequestuserside`}>
-        <li>
-          <h3>{item.name}</h3>
-          <p>{item.description}</p>
-          <ul>
+  //   <ul style={{ color: 'white' }}>
+  //   {items.map(item => (
+  //     // <Link to={`/item/${item.id}`} key={item.id}>
+  //     <Link to={`/servicerequestuserside`}>
+  //       <li>
+  //         <h3>{item.name}</h3>
+  //         <p>{item.description}</p>
+  //         <ul>
+  //           {item.reviews.map(review => (
+  //             <li key={review.id}>
+  //               <p>{review.text}</p>
+  //               <p>Rating: {review.rating}/5</p>
+  //             </li>
+  //           ))}
+  //         </ul>
+  //       </li>
+  //     </Link>
+  //   ))}
+  // </ul>
+  <div>
+    <button onClick={gettempdata}>Fetch Services</button>
+              {res.length > 0 &&
+  <ul style={{ color: 'white' }}>
+    {res.map(item => (
+      <Link to={`/servicerequestuserside`} key={item.serviceId}>
+        <li 
+          onClick={() => {
+            localStorage.setItem('usersearchserviceres', JSON.stringify(item));
+          }}
+          style={{ color: 'white' }}
+        >
+          <h3>{item.providerId}</h3>
+          {/* <p>{item.description}</p> */}
+          {/* <ul>
             {item.reviews.map(review => (
               <li key={review.id}>
                 <p>{review.text}</p>
                 <p>Rating: {review.rating}/5</p>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </li>
       </Link>
     ))}
   </ul>
+}</div>
   );
 };
 
