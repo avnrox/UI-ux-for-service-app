@@ -45,7 +45,7 @@ export const ServiceRequestUserSide = () => {
           console.log("data inside submit from localstorage",user_id,service_id,detail_time,order_detail);
 
           
-          await axios.post('http://localhost:8082/order/user_request?user_id='+user_id+'&service_id='+service_id+'&detail_time='+detail_time+'&order_detail='+order_detail)
+          await axios.post('http://localhost:8082/order/user_request?user_id='+user_id+'&service_id='+service_id+'&detail_time='+detail_time+'&order_detail1='+order_detail)
           .then((response) => {
             console.log(response.data);
             // setRes(response.data);
