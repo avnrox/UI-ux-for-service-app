@@ -139,7 +139,7 @@ export const ServiceProviderHome = () => {
       <Link to={`/servicedetailsandchatserviceproviderside`} key={item.serviceId}>
         <li 
           onClick={() => {
-            localStorage.setItem('serviceproviderselectservicerequest', JSON.stringify(item));
+            localStorage.setItem('spchat', JSON.stringify(item));
           }}
           style={{ color: 'white' }}
         >

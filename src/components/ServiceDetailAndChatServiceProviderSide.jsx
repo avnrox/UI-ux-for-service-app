@@ -18,6 +18,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
+import { set } from "date-fns";
+import axios from "axios";
 
 
 
@@ -29,14 +31,21 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
     // const theme = createTheme();
     const [startDate, setStartDate] = useState(new Date());
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        //   username: data.get('username'),
-        //   password: data.get('password'),
-          description: data.get('description'),
-          address: data.get('address'),
+    const spchat = JSON.parse(localStorage.getItem('spchat'));
+
+    const [description, setDescription] = useState('');
+
+    const order_id = spchat.order_id;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await axios.post('http://localhost:8082/order/provider_reply?order_id='+order_id+'&order_detail='+description)
+        .then((response) => {
+          console.log(response.data);
+          // setRes(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
         navigate('/ServiceProviderHome')
       };
@@ -44,8 +53,23 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
     const navigate = useNavigate();
     return (
         <div>
-           <h1>Service Details like address description etc... display from direct fetch</h1>
-           <h1>Also display and fetch the order details which are available till now like</h1>
+            <p>Order ID: {spchat.availability}</p>
+      <p>User ID: {spchat.detail_time}</p>
+      <p>Provider Email: {spchat.order_id}</p>
+      <p>Service Area: {spchat.order_status}</p>
+      <p>Availability: {spchat.order_time}</p>
+      <p>Detail Time: {spchat.price}</p>
+      <p>Detail Address: {spchat.provider_email}</p>
+      <p>Service Category: {spchat.provider_id}</p>
+      <p>Service Description: {spchat.service_area}</p>
+      <p>Price: {spchat.service_category}</p>
+      <p>Order Time: {spchat.service_description}</p>
+      <p>Order Status: {spchat.service_id}</p>
+      <p>Order Status: {spchat.user_id}</p>
+      <p>Det 1 : {spchat.order_detail1}</p>
+      <p>Det 2 : {spchat.order_detail2}</p>
+      <p>Det 3 : {spchat.order_detail3}</p>
+      <p>Det 4 : {spchat.order_detail4}</p>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -63,7 +87,7 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography> */}
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               {/* <Grid item xs={12} sm={6}>
                 <TextField
@@ -117,10 +141,10 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
                 name="description"
                 id="outlined-multiline-static"
                 label="Description"
-                value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
                 multiline
                 rows={10}
                 defaultValue="Description"
+                onChange={(event) => setDescription(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -178,7 +202,7 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
               </Grid>
             </Grid> */}
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="success">
+            <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
             <Button variant="contained" color="success">Accept</Button>
