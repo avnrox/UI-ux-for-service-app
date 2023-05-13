@@ -71,7 +71,7 @@ export const UserRegister = () => {
             setUser({...user,[e.target.name]:e.target.value})//to show user exisists
           }
           else{
-            navigate('/UserHome')
+            navigate('/userlogin')
           }
           // localStorage.setItem("user_name",response.data.user_name)
           // localStorage.setItem("user_email",response.data.user_email)
