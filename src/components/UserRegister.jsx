@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
+import RegisterValidation from './RegisterValidation';
 
 function Copyright(props) {
   return (
@@ -38,6 +39,9 @@ export const UserRegister = () => {
     userPwd:"",
     email:""
   })
+  const [errors, setError] = useState({})
+  const valdn = errors.userId;
+  const valdp = errors.userPwd;
 
   const{userId, userPwd, email}=user
   const navigate = useNavigate();
@@ -49,27 +53,42 @@ export const UserRegister = () => {
     //   username: data.get('username'),
     //   password: data.get('password'),
     // });
-    await axios.post("http://localhost:8082/users/register", user)
-    .then((response) => {
-      console.log(response.data)
-      // localStorage.setItem("token",response.data.token)
-      localStorage.setItem("user_id",response.data.user_id)
-      console.log("user_id",localStorage.getItem("user_id"))
-      // localStorage.setItem("user_name",response.data.user_name)
-      // localStorage.setItem("user_email",response.data.user_email)
-      // localStorage.setItem("user_mobile",response.data.user_mobile)
-      // localStorage.setItem("user_role",response.data.user_role)
-      // localStorage.setItem("user_status",response.data.user_status)
-      // localStorage.setItem("user_created_at",response.data.user_created_at)
-      // localStorage.setItem("user_updated_at",response.data.user_updated_at)
-    
-    })
-  
-    navigate('/UserHome')
+    if ( valdn === "Cant be empty" || 
+      valdn === "Invalid email-id entered" || 
+      valdp === "Password field cant be empty" ||
+      valdp === "Password needs atleast 4 charectors"){
+        //stop navigation.
+      }
+      else if(errors.userId === "\u2713" && errors.userPwd === "\u2713") {
+        await axios.post("http://localhost:8082/users/register", user)
+        .then((response) => {
+          console.log(response.data)
+          // localStorage.setItem("token",response.data.token)
+          localStorage.setItem("user_id",response.data.user_id)
+          console.log("user_id",localStorage.getItem("user_id"))
+          if (response.data === "user does exist!"){
+            errors.userId = "User already exisits!"
+            setUser({...user,[e.target.name]:e.target.value})//to show user exisists
+          }
+          else{
+            navigate('/UserHome')
+          }
+          // localStorage.setItem("user_name",response.data.user_name)
+          // localStorage.setItem("user_email",response.data.user_email)
+          // localStorage.setItem("user_mobile",response.data.user_mobile)
+          // localStorage.setItem("user_role",response.data.user_role)
+          // localStorage.setItem("user_status",response.data.user_status)
+          // localStorage.setItem("user_created_at",response.data.user_created_at)
+          // localStorage.setItem("user_updated_at",response.data.user_updated_at)           
+        })
+      }
+    //await axios.post("http://localhost:8082/users/register",user)
+    //navigate('/UserHome')
   };
  
 
   const onInputChange  = (e) => {
+    setError(RegisterValidation(user));
       setUser({...user,[e.target.name]:e.target.value})
       const { name, value } = e.target;
       if (name === "userId") {
@@ -84,7 +103,7 @@ export const UserRegister = () => {
           [name]: value,
         });
       }
-     
+
   }
 
   
@@ -141,6 +160,7 @@ export const UserRegister = () => {
                   value={userId}
                   onChange={(e) => onInputChange(e)}
                 />
+                {errors.userId && <p style={{color: "red", fontSize: "13px" }}>{errors.userId}</p>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -154,6 +174,7 @@ export const UserRegister = () => {
                   value={userPwd}
                   onChange={(e) => onInputChange(e)}
                 />
+                {errors.Pwd && <p style={{color: "red", fontSize: "13px" }}>{errors.Pwd}</p>}
               </Grid>
               {/* <Grid item xs={12}>
                 <FormControlLabel

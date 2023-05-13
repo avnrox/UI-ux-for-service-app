@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
+import UserLoginValidation from './UserLoginValidation';
 
 
 function Copyright(props) {
@@ -47,6 +48,10 @@ export const UserLogin = () => {
   const{user_id, user_pwd}=user
   const navigate = useNavigate();
 
+  const [errors, setError] = useState({})
+  const valdn = errors.user_id;
+  const valdp = errors.user_pwd;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // const data = new FormData(event.currentTarget);
@@ -54,10 +59,10 @@ export const UserLogin = () => {
     //   username: data.get('username'),
     //   password: data.get('password'),
     // });
-    // console.log("hello,",user)
-    await axios.post("http://localhost:8082/users/login?user_id="+user_id+"&user_pwd="+user_pwd)
+    console.log("hello,",user)
+    await axios.post("http://localhost:8082/users/login?user_id="+user_id+"&user_pwd="+user_pwd) 
     .then((response) => {
-      console.log(response.data)
+      console.log("response"+response.data)
       // localStorage.setItem("token",response.data.token)
       localStorage.setItem("user_id",response.data)
       console.log("user_id",localStorage.getItem("user_id"))
@@ -68,15 +73,39 @@ export const UserLogin = () => {
       // localStorage.setItem("user_status",response.data.user_status)
       // localStorage.setItem("user_created_at",response.data.user_created_at)
       // localStorage.setItem("user_updated_at",response.data.user_updated_at)
-    
+      if ( valdn === "Cant be empty" || 
+      valdn === "Invalid email-id entered" || 
+      valdp === "Password field cant be empty" ||
+      valdp === "Password needs atleast 4 charectors" ||
+      valdn === "Wrong or unregistered email" ||
+      valdp === "Wrong Password"){
+        //navigate('/UserHome')
+      }
+      else if (response.data === "empty"){
+        errors.user_id = "Wrong or unregistered Email";
+        console.log("error in pwd",errors.user_id)
+      }
+      else if (response.data === "wrong pwd!"){
+        errors.user_pwd = "Wrong password";
+        console.log("error inpwd",errors.user_pwd)
+      }
+      else if(errors.user_id === "\u2713" && errors.user_pwd === "\u2713") {
+        navigate('/UserHome')
+      }
+      setUser({...user,[e.target.name]:e.target.value}) //done to update and show error to the user when they enter wrong pass or email
+
+
     })
-  
-    navigate('/UserHome')
+    
+    //navigate('/UserHome')
   };
  
 
+
+
   const onInputChange  = (e) => {
       setUser({...user,[e.target.name]:e.target.value})
+      setError(UserLoginValidation(user));
 
   }
 
@@ -125,9 +154,10 @@ export const UserLogin = () => {
                 name="user_id"
                 autoComplete="username"
                 autoFocus
-                value={user_id}
+                value={user.user_id}
                 onChange={(e) => onInputChange(e)}
               />
+              {errors.user_id && <p style={{color: "red", fontSize: "13px" }}>{errors.user_id}</p>}
               <TextField
                 margin="normal"
                 required
@@ -137,9 +167,10 @@ export const UserLogin = () => {
                 type="password"
                 id="user_pwd"
                 autoComplete="current-password"
-                value={user_pwd}
+                value={user.user_pwd}
                 onChange={(e) => onInputChange(e)}
               />
+              {errors.user_pwd && <p style={{color: "red", fontSize: "13px" }}>{errors.user_pwd}</p>}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -170,5 +201,6 @@ export const UserLogin = () => {
         </Grid>
       </Grid>
     </ThemeProvider>
+
   );
 }
