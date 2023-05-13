@@ -21,7 +21,7 @@ import { Footer, Blog, Features, Services, Header, Firstheader } from './contain
 import { Axios } from 'axios';
 import { ServiceProviderAddService } from './ServiceProviderAddService';
 import UserOrders from './components/UserOrders';
-
+import { UserCompletedList } from './components/UserCompletedList';
 
 function App() {
   return (
@@ -92,7 +92,8 @@ function App() {
           <Route path="/servicedetailsandchatserviceproviderside" Component={ServiceDetailAndChatServiceProviderSide}/>
           <Route path="/serviceprovideraddservice" Component={ServiceProviderAddService}/>
           <Route path='/userorders' Component={UserOrders} />
-          {/* /* <Route path="/servicerequest" Component={ServiceRequest}/> */} 
+          <Route path="/usercompletedlist" Component={UserCompletedList}/>
+          {/* <Route path="/servicerequest" Component={ServiceRequest}/>  */}
         </Routes>
         </ProSidebarProvider>
     </div>
