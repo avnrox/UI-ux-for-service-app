@@ -20,6 +20,7 @@ import { Serviceslogo, Navbar, Servicenavbar} from './components';
 import { Footer, Blog, Features, Services, Header, Firstheader } from './containers';
 import { Axios } from 'axios';
 import { ServiceProviderAddService } from './ServiceProviderAddService';
+import UserOrders from './components/UserOrders';
 
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
           <Route path="/servicedetailsandchatuserside" Component={ServiceDetailAndChatUserSide}/>
           <Route path="/servicedetailsandchatserviceproviderside" Component={ServiceDetailAndChatServiceProviderSide}/>
           <Route path="/serviceprovideraddservice" Component={ServiceProviderAddService}/>
+          <Route path='/userorders' Component={UserOrders} />
           {/* /* <Route path="/servicerequest" Component={ServiceRequest}/> */} 
         </Routes>
         </ProSidebarProvider>

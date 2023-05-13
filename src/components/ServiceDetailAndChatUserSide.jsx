@@ -18,6 +18,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
+import { StepDescription } from "semantic-ui-react";
+import axios from "axios";
 
 
 
@@ -28,24 +30,98 @@ const theme = createTheme();
 export const ServiceDetailAndChatUserSide = () => {
     // const theme = createTheme();
     const [startDate, setStartDate] = useState(new Date());
+    const [description, setDescription] = useState('');
+    // const [availability, setAvailability] = useState(localStorage.getItem('availability'));
+    //   let order = {
+    //   availability: '',
+    //   detail_time: '',
+    //   order_id: -1,
+    //   order_status: -100,
+    //   order_time: '',
+    //   price: -100,
+    //   provider_email: '',
+    //   provider_id: '',
+    //   service_area: '',
+    //   service_category: '',
+    //   service_description: '',
+    //   service_id: -100,
+    //   user_id: '',
+    //   verified: true,
+    // };
+    
+    // order = {
+    //   ...order,
+    //   availability: localStorage.getItem('availability'),
+    //   detail_time: localStorage.getItem('detail_time'),
+    //   order_id: localStorage.getItem('order_id'),
+    //   service_area: localStorage.getItem('service_area'), 
+    //   provider_email: localStorage.getItem('provider_email'),
+    // };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        //   username: data.get('username'),
-        //   password: data.get('password'),
-          description: data.get('description'),
-          address: data.get('address'),
-        });
-        navigate('/ServiceProviderHome')
+    // const order = JSON.parse(localStorage.getItem('order'));
+    // const [orderState, setOrderState] = useState(order);
+  const searchserviceres = JSON.parse(localStorage.getItem('usersearchserviceres'));
+    // console.log("what?:",searchserviceres.order_id);
+
+    // const updateOrder = () => {
+    //   const newOrder = {
+    //     ...orderState,
+    //     availability: 'weekends',
+    //     price: 120,
+    //     order_status: 0,
+    //   };
+    //   setOrderState(newOrder);
+    // };
+
+    const handleSubmit =  async (e) => {
+        // const data = new FormData(event.currentTarget);
+        // console.log({
+        // //   username: data.get('username'),
+        // //   password: data.get('password'),
+        //   description: data.get('description'),
+        //   address: data.get('address'),
+        // });
+        
+          e.preventDefault();
+          const order_id = parseInt(searchserviceres.order_id);
+          const order_detail = description;
+          
+          console.log("data inside submit from localstorage",order_id,order_detail);
+
+
+          await axios.post('http://localhost:8082/order/user_reply3?order_id='+order_id+'&order_detail3='+order_detail)
+          .then((response) => {
+            console.log(response.data);
+            // setRes(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+
+
+        // navigate('/userorders', {state:{serviceList}});
+        navigate('/userorders')
       };
-
+      
+      // console.log("description" , description);
     const navigate = useNavigate();
     return (
         <div>
-           <h1>Service Details like address description etc... display from direct fetch</h1>
-           <h1>Also display and fetch the order details which are available till now like</h1>
+           <p>Order ID: {searchserviceres.order_id}</p>
+      <p>User ID: {searchserviceres.user_id}</p>
+      <p>Provider Email: {searchserviceres.provider_email}</p>
+      <p>Service Area: {searchserviceres.service_area}</p>
+      <p>Availability: {searchserviceres.availability}</p>
+      <p>Detail Time: {searchserviceres.detail_time}</p>
+      <p>Detail Address: {searchserviceres.detail_add}</p>
+      <p>Service Category: {searchserviceres.service_category}</p>
+      <p>Service Description: {searchserviceres.service_description}</p>
+      <p>Price: {searchserviceres.price}</p>
+      <p>Order Time: {searchserviceres.order_time}</p>
+      <p>Order Status: {searchserviceres.order_status}</p>
+      {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
+   
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -63,7 +139,7 @@ export const ServiceDetailAndChatUserSide = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography> */}
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               {/* <Grid item xs={12} sm={6}>
                 <TextField
@@ -117,10 +193,11 @@ export const ServiceDetailAndChatUserSide = () => {
                 name="description"
                 id="outlined-multiline-static"
                 label="Description"
-                value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
+                // value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
                 multiline
                 rows={10}
-                defaultValue="Description"
+                // defaultValue="Description"
+                onChange={(event) => setDescription(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -178,7 +255,7 @@ export const ServiceDetailAndChatUserSide = () => {
               </Grid>
             </Grid> */}
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="success">
+            <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
             <Button color="secondary">Withdraw</Button>

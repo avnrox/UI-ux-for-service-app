@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
 
 
 
@@ -28,23 +29,46 @@ const theme = createTheme();
 export const ServiceRequestUserSide = () => {
     // const theme = createTheme();
     const [startDate, setStartDate] = useState(new Date());
+    const [description, setDescription] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedArea, setSelectedArea] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        //   username: data.get('username'),
-        //   password: data.get('password'),
-          description: data.get('description'),
-          address: data.get('address'),
-        });
-        navigate('/ServiceProviderHome')
+
+    const searchserviceres = JSON.parse(localStorage.getItem('usersearchserviceres'));
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+          const user_id = localStorage.getItem('user_id');
+          const service_id = searchserviceres.serviceId;
+          const detail_time = startDate;
+          const order_detail = description;
+          console.log("data inside submit from localstorage",user_id,service_id,detail_time,order_detail);
+
+          
+          await axios.post('http://localhost:8082/order/user_request?user_id='+user_id+'&service_id='+service_id+'&detail_time='+detail_time+'&order_detail='+order_detail)
+          .then((response) => {
+            console.log(response.data);
+            // setRes(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+        navigate('/userhomesearch')
       };
 
     const navigate = useNavigate();
     return (
         <div>
-           <h1>Service Details like address description etc... display from direct fetch</h1>
+            <p>Order ID: {searchserviceres.availability}</p>
+      <p>User ID: {searchserviceres.price}</p>
+      <p>Provider Email: {searchserviceres.providerEmail}</p>
+      <p>Service Area: {searchserviceres.providerId}</p>
+      <p>Availability: {searchserviceres.serviceArea}</p>
+      <p>Detail Time: {searchserviceres.serviceCategory}</p>
+      <p>Detail Address: {searchserviceres.serviceDescription}</p>
+      <p>Service Category: {searchserviceres.serviceId}</p>
+      <p>Service Description: {searchserviceres.servicePhoto}</p>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -62,7 +86,7 @@ export const ServiceRequestUserSide = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography> */}
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               {/* <Grid item xs={12} sm={6}>
                 <TextField
@@ -94,13 +118,14 @@ export const ServiceRequestUserSide = () => {
                   name="username"
                   autoComplete="Username"
                 /> */}
-                 <Autocomplete
+                 {/* <Autocomplete
                   disablePortal
                   id="combo-box-demo"
                   options={Service}
                   sx={{ width: 300 }}
-                  renderInput={(params) => <TextField {...params} label="Service" />}
-                />
+                  renderInput={(params) => <TextField {...params} label="Service"
+                   />}
+                /> */}
                 {/* <TextField
                   required
                   fullWidth
@@ -119,6 +144,7 @@ export const ServiceRequestUserSide = () => {
                 multiline
                 rows={4}
                 defaultValue="Description"
+                onChange={(event) => setDescription(event.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -141,13 +167,22 @@ export const ServiceRequestUserSide = () => {
                 rows={4}
                 defaultValue="Address.. Maybe change to proper address type fields.. check notes on onedrive"
                 /> */}
-                <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={Area}
-                  sx={{ width: 300 }}
-                  renderInput={(params) => <TextField {...params} label="Area" />}
-                />
+                <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+        <option value="">Select a category</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.name}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+      <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
+        <option value="">Select an area</option>
+        {areas.map((area) => (
+          <option key={area.id} value={area.name}>
+            {area.name}
+          </option>
+        ))}
+      </select>
               </Grid>
               <Grid item xs={12}>
                 {/* <FormControlLabel
@@ -176,7 +211,7 @@ export const ServiceRequestUserSide = () => {
               </Grid>
             </Grid> */}
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="success">
+            <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
             <Button color="secondary">Withdraw</Button>
@@ -194,18 +229,56 @@ export const ServiceRequestUserSide = () => {
     )
 }
 
-const Service = [
-    { label: 'Cleaning', id: 1 },
-    { label: 'Babysitting', id: 2 },
-    { label: 'Pest Control', id: 3 },
-    { label: 'Plumbing', id: 4 },
-    { label: 'Electrical Repairs', id: 5 },
-    { label: 'Beauty', id: 6 },
+ const categories = [
+    {
+      id: 1,
+      name: 'Cleaning',
+    },
+    {
+      id: 2,
+      name: 'Baby Sitting',
+    },
+    {
+      id: 3,
+      name: 'Pest Control',
+    },
+    {
+      id: 4,
+      name: 'Electrical Repair',
+    },
+    {
+      id: 5,
+      name: 'Plumbing',
+    },
+    {
+      id: 6,
+      name: 'Beauty',
+    },
   ];
-  const Area = [
-    { label: 'Southampton', id: 1 },
-    { label: 'London', id: 2 },
-    { label: 'Manchester', id: 3 },
-    { label: 'Edinburgh', id: 4 },
+  const areas = [
+    {
+      id: 1,
+      name: 'Southampton',
+    },
+    {
+      id: 2,
+      name: 'London',
+    },
+    {
+      id: 3,
+      name: 'Manchester',
+    },
+    {
+      id: 4,
+      name: 'Birmingham',
+    },
+    {
+      id: 5,
+      name: 'Edinburgh',
+    },
+    {
+      id: 6,
+      name: 'Leeds',
+    },
   ];
   

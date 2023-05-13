@@ -26,6 +26,21 @@ const Navbar = () => {
     console.log("user_id",localStorage.getItem("user_id"))
     };
 
+    const handleUserOrders = (event) => {
+      event.preventDefault();
+      // const data = new FormData(event.currentTarget);
+      // console.log({
+      //   username: data.get('username'),
+      //   password: data.get('password'),
+      // });
+      // Store selected values in localStorage
+      // localStorage.setItem('serviceCategory', selectedCategory);
+      // localStorage.setItem('serviceArea', selectedArea);
+      // console.log("data:", localStorage.getItem('serviceCategory'),  localStorage.getItem('serviceArea'));
+      // Perform search or other actions here
+      navigate('/userorders');
+    };
+
   return (
     <div className="seva__navbar">
       <div className="seva__navbar-links">
@@ -35,7 +50,8 @@ const Navbar = () => {
         <div className="seva__navbar-links_container">
           <p><a href="#home">Home</a></p>
           <p><a href="#wseva">Services</a></p>
-          <p><a href="#features">Orders</a></p>
+          {/* <p><a href="#features">Orders</a></p> */}
+          <button type="button" onClick={handleUserOrders} >Orders</button>
           <p><a href="#blog">News</a></p>
         </div>
       </div>
