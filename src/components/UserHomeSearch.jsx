@@ -365,7 +365,7 @@ export const UserHomeSearch = () => {
   const [res, setRes] = useState([]);
   const gettempdata = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:8082/service/search_by_area_category_with_review?service_area='+servicearea+'&service_category='+servicecategory)
+    await axios.post('http://localhost:8082/review/load_reviews_by_area_category?service_area='+servicearea+'&service_category='+servicecategory)
     .then((response) => {
       console.log(response.data);
       setRes(response.data);
@@ -434,7 +434,7 @@ export const UserHomeSearch = () => {
   //   ))}
   // </ul>
   <div className='products'>
-    <button style= {{opacity:0}} onClick={gettempdata}>Fetch Services</button>
+    <button style= {{opacity:100}} onClick={gettempdata}>Fetch Services</button>
               {res.length > 0 &&
   <ul style={{ color: 'white', display: "inline" }}>
     {res.map(item => (
@@ -454,7 +454,7 @@ export const UserHomeSearch = () => {
           <p>{item.score}</p>
           </div> */}
           <div className="seva__blog-container_groupB">
-          <Article imgUrl={blog02} date={item.providerId} text={`Availability:${item.availability}`} text1={`Price:${item.price}`} score={`Score/Reviews`}/>
+          <Article imgUrl={blog02} date={item.providerId} text={`Availability:${item.availability}`} text1={`Price:${item.price}`} score={item.score} reviews={item.content}/>
           {/* <Article imgUrl={blog03} date={item.providerId} text={`Availability: ${item.availability}`}/> */}
           {/* <Article imgUrl={blog04} date={item.providerId} text="sdfjhagskjdfhsjkf sdkhfjksdhf jkshfk jshdfkjs hfjk" />
           <Article imgUrl={blog05} date={item.providerId} text="sdhfgshjdfhgsjk sdkjhfjksah fjksdfjk hsdjkfh sjkfh kjasfhkj" /> */}
