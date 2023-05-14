@@ -364,7 +364,7 @@ export const UserHomeSearch = () => {
   const [res, setRes] = useState([]);
   const gettempdata = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:8082/service/search_by_area_category?service_area='+servicearea+'&service_category='+servicecategory)
+    await axios.post('http://localhost:8082/service/search_by_area_category_with_review?service_area='+servicearea+'&service_category='+servicecategory)
     .then((response) => {
       console.log(response.data);
       setRes(response.data);
@@ -447,6 +447,8 @@ export const UserHomeSearch = () => {
           {/* <img src={productImage} /> */}
           <h3>{item.providerId}</h3>
           <p>{item.serviceDescription}</p>
+          <p>{item.content}</p>
+          <p>{item.score}</p>
           {/* <ul>
             {item.reviews.map(review => (
               <li key={review.id}>
