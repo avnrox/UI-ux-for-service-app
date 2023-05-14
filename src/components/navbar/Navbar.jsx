@@ -68,7 +68,7 @@ const Navbar = () => {
           <div className="seva__navbar-menu_container-links">
             <p><a href="#home">Home</a></p>
             <p><a href="#wseva">Services</a></p>
-            <p><a href="#features">Orders</a></p>
+            <button type="button" onClick={handleUserOrders} >Orders</button>
             <p><a href="#blog">News</a></p>
           </div>
           <div className="seva__navbar-menu_container-links-sign">
