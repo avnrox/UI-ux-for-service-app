@@ -1,0 +1,125 @@
+import React from 'react';
+//import hoomans from '../../assets/humans.png';
+import comunity from '../../assets/comunity2.png';
+import './serviceheader.css';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+
+const Serviceheader = () => {
+
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedArea, setSelectedArea] = useState('');
+
+
+
+  const navigate = useNavigate();
+  const categories = [
+    {
+      id: 1,
+      name: 'Cleaning',
+    },
+    {
+      id: 2,
+      name: 'Baby Sitting',
+    },
+    {
+      id: 3,
+      name: 'Pest Control',
+    },
+    {
+      id: 4,
+      name: 'Electrical Repair',
+    },
+    {
+      id: 5,
+      name: 'Plumbing',
+    },
+    {
+      id: 6,
+      name: 'Beauty',
+    },
+  ];
+  const areas = [
+    {
+      id: 1,
+      name: 'Southampton',
+    },
+    {
+      id: 2,
+      name: 'London',
+    },
+    {
+      id: 3,
+      name: 'Manchester',
+    },
+    {
+      id: 4,
+      name: 'Birmingham',
+    },
+    {
+      id: 5,
+      name: 'Edinburgh',
+    },
+    {
+      id: 6,
+      name: 'Leeds',
+    },
+  ];
+  
+  const handleOnClick = (event) => {
+    event.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   username: data.get('username'),
+    //   password: data.get('password'),
+    // });
+    // Store selected values in localStorage
+    localStorage.setItem('serviceCategory', selectedCategory);
+    localStorage.setItem('serviceArea', selectedArea);
+    console.log("data:", localStorage.getItem('serviceCategory'),  localStorage.getItem('serviceArea'));
+    // Perform search or other actions here
+    navigate('/userhomesearch');
+  };
+  
+  return (
+    <div className="seva__header section__padding" id="home">
+      <div className="seva__header-content">
+        <h1 className="gradient__text">
+          Connecting Services Since 2023{" "}
+        </h1>
+        <p>
+          Finding you the prefect Helpers.
+        </p>
+  
+        <div className="seva__header-content__input">
+        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+        <option value="">Select a category</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.name}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+      <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
+        <option value="">Select an area</option>
+        {areas.map((area) => (
+          <option key={area.id} value={area.name}>
+            {area.name}
+          </option>
+        ))}
+      </select>
+      <button type="button" onClick={handleOnClick}>
+        Search
+      </button>
+      
+        </div>
+      </div>
+  
+      <div className="seva__header-image">
+        <img src={comunity} alt="connecting people" />
+      </div>
+    </div>
+  );
+}
+export default Serviceheader;

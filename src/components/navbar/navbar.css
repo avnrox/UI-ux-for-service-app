@@ -1,5 +1,4 @@
 .seva__navbar {
-    display: flex;
     justify-content: space-between;
     align-items: center;
 
@@ -37,6 +36,21 @@
 .seva__navbar-sign p,
 .seva__navbar-menu_container p {
     color: #fff;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    text-transform: capitalize;
+
+    margin: 0 1rem;
+    cursor: pointer;
+}
+
+
+.seva__navbar-links_container button,
+.seva__navbar-sign button,
+.seva__navbar-menu_container button {
+    color: #792222;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 18px;
@@ -111,13 +125,13 @@
 
 @media screen and (max-width: 700px) {
     .seva__navbar {
-        padding: 2rem 4rem;
+        padding: 4rem 4rem;
     }
 }
 
 @media screen and (max-width: 550px) {
     .seva__navbar {
-        padding: 2rem;
+        padding: 4rem 4rem;
     }
 
     .seva__navbar-sign {

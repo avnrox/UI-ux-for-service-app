@@ -343,7 +343,8 @@ import React,  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './userhomesearch.css';
-
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 export const UserHomeSearch = () => {
 
@@ -433,28 +434,31 @@ export const UserHomeSearch = () => {
   //   ))}
   // </ul>
   <div className='products'>
-    <button onClick={gettempdata}>Fetch Services</button>
+    <button style= {{opacity:0}} onClick={gettempdata}>Fetch Services</button>
               {res.length > 0 &&
-  <ul style={{ color: 'white' }}>
+  <ul style={{ color: 'white', display: "inline" }}>
     {res.map(item => (
       <Link to={`/servicerequestuserside`} key={item.serviceId}>
+
         <li 
           onClick={() => {
             localStorage.setItem('usersearchserviceres', JSON.stringify(item));
           }} //Arjun start from hereS
-          style={{ color: 'white' }}
+          // style={{ color: 'white' }}
         >
-          {/* <img src={productImage} /> */}
-          <h3>{item.providerId}</h3>
-          <p>{item.serviceDescription}</p>
-          {/* <ul>
-            {item.reviews.map(review => (
-              <li key={review.id}>
-                <p>{review.text}</p>
-                <p>Rating: {review.rating}/5</p>
-              </li>
-            ))}
-          </ul> */}
+         <div className="seva__blog section__padding" id="blog">
+          <div className="seva__blog-container">
+          {/* <div className="seva__blog-container_groupA">
+          <Article imgUrl={blog01} date="Sep 26, 2021" text="yo how you doing?" />
+          </div> */}
+          <div className="seva__blog-container_groupB">
+          <Article imgUrl={blog02} date={item.providerId} text={`Availability:${item.availability}`} text1={`Price:${item.price}`} score={`Score/Reviews`}/>
+          {/* <Article imgUrl={blog03} date={item.providerId} text={`Availability: ${item.availability}`}/> */}
+          {/* <Article imgUrl={blog04} date={item.providerId} text="sdfjhagskjdfhsjkf sdkhfjksdhf jkshfk jshdfkjs hfjk" />
+          <Article imgUrl={blog05} date={item.providerId} text="sdhfgshjdfhgsjk sdkjhfjksah fjksdfjk hsdjkfh sjkfh kjasfhkj" /> */}
+        </div>
+    </div>
+  </div>
         </li>
       </Link>
     ))}

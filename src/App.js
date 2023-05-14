@@ -17,7 +17,7 @@ import { ServiceDetailAndChatUserSide } from './components/ServiceDetailAndChatU
 import { Sidebar, Menu, MenuItem, SubMenu, ProSidebarProvider } from 'react-pro-sidebar';
 import { ServiceDetailAndChatServiceProviderSide } from './components/ServiceDetailAndChatServiceProviderSide';
 import { Serviceslogo, Navbar, Servicenavbar} from './components';
-import { Footer, Blog, Features, Services, Header, Firstheader } from './containers';
+import { Footer, Blog, Features, Services, Header, Firstheader, Serviceheader } from './containers';
 import { Axios } from 'axios';
 import { ServiceProviderAddService } from './ServiceProviderAddService';
 import UserOrders from './components/UserOrders';
@@ -54,10 +54,25 @@ function App() {
             </>
           } />
           <Route path="/home" Component={Home} /> 
-          {/* make a home page nothing exists yet */}
           <Route path="/userregister" Component={UserRegister} />
           <Route path="/serviceproviderregister" Component={ServiceProviderRegister}/>
+
+          <Route path="/userhomesearch" element={
+            <>
+            <div className="gradient__bg">
+            <Navbar />
+            <Serviceheader/>
+            <UserHomeSearch/>
+            </div>
+            
+            </>
+          } />
+
+
           <Route path="/userhomesearch" Component={UserHomeSearch}/>
+
+
+
           {/* NEED TO MAKE A PAGE THAT SHOWS THE RESULT OF SELECTED OPTIONS IN USER HOME 
           =====> USERHOMESEARCH IS THAT PAGE. ONCLICK OF SEARCH, WE NAVIGATE TO THAT PAGE*/}
           <Route path="/userhome" element={
