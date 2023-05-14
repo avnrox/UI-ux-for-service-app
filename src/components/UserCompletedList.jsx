@@ -32,7 +32,8 @@ const theme = createTheme();
 export const UserCompletedList = (props) => {
     // const theme = createTheme();
     const [startDate, setStartDate] = useState(new Date());
-    const [description, setDescription] = useState('');
+    const [review, setReview] = useState('');
+    const [score, setScore] = useState(0);
 
 
     // const location = useLocation();
@@ -70,6 +71,7 @@ export const UserCompletedList = (props) => {
     // const order = JSON.parse(localStorage.getItem('order'));
     // const [orderState, setOrderState] = useState(order);
   const usercompletedlist = JSON.parse(localStorage.getItem('usercompletedlist'));
+  
     // console.log("what?:",searchserviceres.order_id);
 
     // const updateOrder = () => {
@@ -90,20 +92,20 @@ export const UserCompletedList = (props) => {
     const handleSubmit =  async (e) => {
         
           e.preventDefault();
-          // const order_id = parseInt(searchserviceres.order_id);
-          // const order_detail = description;
-          
+          const user_id =localStorage.getItem("user_id");
+          const service_id = parseInt(usercompletedlist.service_id);
+          const order_id = parseInt(usercompletedlist.order_id);
           // console.log("data inside submit from localstorage",order_id,order_detail);
 
 
-          // await axios.post('http://localhost:8082/order/user_completed_list?order_id='+order_id)
-          // .then((response) => {
-          //   console.log(response.data);
-          //   // setRes(response.data);
-          // })
-          // .catch((error) => {
-          //   console.log(error);
-          // });
+          await axios.post('http://localhost:8082/review/user_give?user_id='+user_id+'&service_id='+service_id+'&order_id='+order_id+'&score='+score+'&content='+review)
+          .then((response) => {
+            console.log(response.data);
+            // setRes(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
         // navigate('/userorders', {state:{serviceList}});
         localStorage.removeItem('usercompletedlist');
@@ -190,7 +192,19 @@ export const UserCompletedList = (props) => {
                   id="description"
                   autoComplete="Description"
                 /> */}
-                {/* <TextField
+                <TextField
+                required
+                fullWidth
+                name="score"
+                id="outlined-multiline-static"
+                label="score"
+                // value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
+                multiline
+                rows={1}
+                // defaultValue="Description"
+                onChange={(event) => setScore(event.target.value)}
+                />
+                <TextField
                 required
                 fullWidth
                 name="description"
@@ -200,8 +214,8 @@ export const UserCompletedList = (props) => {
                 multiline
                 rows={10}
                 // defaultValue="Description"
-                onChange={(event) => setDescription(event.target.value)}
-                /> */}
+                onChange={(event) => setReview(event.target.value)}
+                />
               </Grid>
               <Grid item xs={12}>
                 {/* <TextField
@@ -258,10 +272,9 @@ export const UserCompletedList = (props) => {
               </Grid>
             </Grid> */}
             <Stack direction="row" spacing={2}>
-            {/* <Button variant="contained" color="success" onClick={handleSubmit}>
-                Submit
+            <Button variant="contained" color="success" onClick={handleSubmit}>
+                Submit Review
             </Button>
-            <Button color="secondary">Withdraw</Button> */}
 
             {/* <Button variant="outlined" color="error">
              Error

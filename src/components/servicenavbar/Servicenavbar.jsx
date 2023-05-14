@@ -40,7 +40,7 @@ const Servicenavbar = () => {
         <div className="seva__navbar-links_container">
           <p><a href="#home">Home</a></p>
           <p><a href="#wseva">Services</a></p>
-          <p><a href="#features">Orders</a></p>
+          <button type="button" onClick={gotoprofile}>Orders</button>
           <p><a href='#newpagelink'>Add Service</a></p>
           <p><a href="#blog">News</a></p>
         </div>

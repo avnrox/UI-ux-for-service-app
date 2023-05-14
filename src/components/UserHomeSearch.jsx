@@ -365,7 +365,7 @@ export const UserHomeSearch = () => {
   const [res, setRes] = useState([]);
   const gettempdata = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:8082/service/search_by_area_category?service_area='+servicearea+'&service_category='+servicecategory)
+    await axios.post('http://localhost:8082/service/search_by_area_category_with_review?service_area='+servicearea+'&service_category='+servicecategory)
     .then((response) => {
       console.log(response.data);
       setRes(response.data);
@@ -450,6 +450,8 @@ export const UserHomeSearch = () => {
           <div className="seva__blog-container">
           {/* <div className="seva__blog-container_groupA">
           <Article imgUrl={blog01} date="Sep 26, 2021" text="yo how you doing?" />
+          <p>{item.content}</p>
+          <p>{item.score}</p>
           </div> */}
           <div className="seva__blog-container_groupB">
           <Article imgUrl={blog02} date={item.providerId} text={`Availability:${item.availability}`} text1={`Price:${item.price}`} score={`Score/Reviews`}/>

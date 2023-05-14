@@ -152,8 +152,8 @@ export const ServiceDetailAndChatUserSide = () => {
       <p>Price: {searchserviceres.price}</p>
       <p>Order Time: {searchserviceres.order_time}</p>
       <p>Order Status: {searchserviceres.order_status}</p>
-      <p>Order detail coming from sp: {searchserviceres.order_detail2}</p>
-      <p>Order detail coming from sp: {searchserviceres.order_detail4}</p>
+      <p>Order detail coming from sp1: {searchserviceres.order_detail2}</p>
+      <p>Order detail coming from sp2: {searchserviceres.order_detail1}</p>
       {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
    
     <ThemeProvider theme={theme}>

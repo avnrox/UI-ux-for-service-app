@@ -90,20 +90,20 @@ export const ProviderOrdersAcceptedList = (props) => {
     const handleSubmit =  async (e) => {
         
           e.preventDefault();
-          // const order_id = parseInt(searchserviceres.order_id);
+          const order_id = parseInt(provideracceptedlist.order_id);
           // const order_detail = description;
           
           // console.log("data inside submit from localstorage",order_id,order_detail);
 
 
-          // await axios.post('http://localhost:8082/order/user_completed_list?order_id='+order_id)
-          // .then((response) => {
-          //   console.log(response.data);
-          //   // setRes(response.data);
-          // })
-          // .catch((error) => {
-          //   console.log(error);
-          // });
+          await axios.post('http://localhost:8082/order/provider_confirm_finish?order_id='+order_id)
+          .then((response) => {
+            console.log(response.data);
+            // setRes(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
         // navigate('/userorders', {state:{serviceList}});
         //API FOR CHANGE STATUS TO COMPLETE CALL
