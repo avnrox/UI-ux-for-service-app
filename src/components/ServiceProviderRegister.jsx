@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from 'react';
+import ServiceprovidersignupValidation from './ServiceprovidersignupValidation';
 
 // const onInputChange = (e) => {
 //   const { name, value } = e.target;
@@ -73,6 +75,10 @@ export const ServiceProviderRegister = () => {
     providerAdd:"",
     description:""
   })
+  const [errors, setError] = useState({})
+  const valdn = errors.providerId;
+  const valdp = errors.providerPwd;
+  const valdd = errors.description;
   
   const{providerId, providerPwd, providerAdd, description}=serviceprovider
 
@@ -83,12 +89,7 @@ export const ServiceProviderRegister = () => {
     //   username: data.get('username'),
     //   password: data.get('password'),
     // });
-    await axios.post("http://localhost:8082/serviceprovider/register", serviceprovider)
-    .then((response) => {
-      console.log(response.data)
-      // localStorage.setItem("token",response.data.token)
-      localStorage.setItem("provider_id",response.data)
-      console.log("provider_id",localStorage.getItem("provider_id"))
+    
       // localStorage.setItem("user_name",response.data.user_name)
       // localStorage.setItem("user_email",response.data.user_email)
       // localStorage.setItem("user_mobile",response.data.user_mobile)
@@ -96,14 +97,41 @@ export const ServiceProviderRegister = () => {
       // localStorage.setItem("user_status",response.data.user_status)
       // localStorage.setItem("user_created_at",response.data.user_created_at)
       // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+      if ( valdn === "Cant be empty" || 
+      valdn === "Invalid email-id entered" || 
+      valdp === "Password field cant be empty" ||
+      valdp === "Password needs atleast 4 charectors" ||
+      valdd === "Cant be empty" ||
+      valdd === "Too Short Description." ){
+        //no navigate
+      }
+      else if (errors.providerId === "\u2713" && errors.providerPwd === "\u2713" && errors.description === "\u2713")
+      {
+        await axios.post("http://localhost:8082/serviceprovider/register", serviceprovider)
+        .then((response) => {
+          console.log(response.data)
+          // localStorage.setItem("token",response.data.token)
+          localStorage.setItem("provider_id",response.data)
+          console.log("provider_id",localStorage.getItem("provider_id"))
+          if (response.data === "user does exsit!"){
+            errors.providerId = "User Exisits";
+          }
+          else {
+            navigate('/serviceproviderlogin') 
+          }
+          
+        })
+        
+      }
     
-    })
-    navigate('/ServiceProviderHome')
+    
+    //navigate('/ServiceProviderHome')
 
   }
   const navigate = useNavigate();
 
   const onInputChange  = (e) => {
+    setError(ServiceprovidersignupValidation(serviceprovider));
     setServiceProvider({...serviceprovider,[e.target.name]:e.target.value})
     const { name, value } = e.target;
     if (name === "providerId") {
@@ -173,6 +201,7 @@ export const ServiceProviderRegister = () => {
                   value={providerId}
                   onChange={(e) => onInputChange(e)}
                 />
+                {errors.providerId && <p style={{color: "red", fontSize: "13px" }}>{errors.providerId}</p>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -186,6 +215,7 @@ export const ServiceProviderRegister = () => {
                   value={providerPwd}
                   onChange={(e) => onInputChange(e)}
                 />
+                {errors.providerPwd && <p style={{color: "red", fontSize: "13px" }}>{errors.providerPwd}</p>}
               </Grid>
               
               <Grid item xs={12}>
@@ -210,6 +240,7 @@ export const ServiceProviderRegister = () => {
                 onChange={(e) => onInputChange(e)}
                 // defaultValue="Description"
                 />
+                {errors.description && <p style={{color: "red", fontSize: "13px" }}>{errors.description}</p>}
               </Grid>
               <Grid item xs={12}>
                 {/* <TextField

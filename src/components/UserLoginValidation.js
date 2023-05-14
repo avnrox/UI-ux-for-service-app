@@ -11,9 +11,6 @@ function UserLoginValidation(user) {
     else if (!email_pattern.test(user.user_id)) {
         error.user_id = "Invalid email-id entered"
     }
-    // else if (user.user_id === "empty"){
-    //     error.user_id = "Wrong or unregistered email"
-    // }
     else {
         error.user_id = "\u2713"
     }
@@ -23,10 +20,6 @@ function UserLoginValidation(user) {
     else if (user.user_pwd.length < 3) {
         error.user_pwd = "Password needs atleast 4 charectors"
     }
-    // else if (user.user_pwd === "wrong pwd!")
-    // {
-    //     error.user_pwd = "Wrong Password"
-    // }
    else {
     error.user_pwd = "\u2713"
 }
@@ -39,8 +32,3 @@ function UserLoginValidation(user) {
 }
 
 export default UserLoginValidation;
-
-//1 = email not empty
-//2 = Email Didn't match
-//3 = Password should not be empty
-//4 = Password too short - Need atleast 8 charectors

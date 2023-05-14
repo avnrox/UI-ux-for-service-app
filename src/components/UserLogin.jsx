@@ -83,11 +83,9 @@ export const UserLogin = () => {
       }
       else if (response.data === "empty"){
         errors.user_id = "Wrong or unregistered Email";
-        console.log("error in pwd",errors.user_id)
       }
       else if (response.data === "wrong pwd!"){
         errors.user_pwd = "Wrong password";
-        console.log("error inpwd",errors.user_pwd)
       }
       else if(errors.user_id === "\u2713" && errors.user_pwd === "\u2713") {
         navigate('/UserHome')

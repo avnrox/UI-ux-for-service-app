@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
-
+import ServiceregisterValidation from './ServiceregisterValidation';
 
 function Copyright(props) {
   return (
@@ -40,6 +40,10 @@ export const ServiceProviderLogin = () => {
     provider_pwd:""
   })
 
+  const [errors, setError] = useState({})
+  const valdn = errors.provider_id;
+  const valdp = errors.provider_pwd;
+
   const{provider_id, provider_pwd}=provider
 
   const handleSubmit = async (e) => {
@@ -62,16 +66,36 @@ export const ServiceProviderLogin = () => {
       // localStorage.setItem("user_status",response.data.user_status)
       // localStorage.setItem("user_created_at",response.data.user_created_at)
       // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+      if ( valdn === "Cant be empty" || 
+      valdn === "Invalid email-id entered" || 
+      valdp === "Password field cant be empty" ||
+      valdp === "Password needs atleast 4 charectors" ||
+      valdn === "Wrong or unregistered email" ||
+      valdp === "Wrong Password"){
+        //no navigate
+      }
+      else if (response.data === "empty"){
+        errors.provider_id = "Wrong or unregistered Email";
+      }
+      else if (response.data === "wrong pwd!"){
+        errors.provider_pwd = "Wrong password";
+
+      }
+      else if(errors.provider_id === "\u2713" && errors.provider_pwd === "\u2713") {
+        navigate('/ServiceProviderHome')
+      }
+      setProvider({...provider,[e.target.name]:e.target.value})
     
     })
   
-    navigate('/ServiceProviderHome')
+    //navigate('/ServiceProviderHome')
   };
 
   const navigate = useNavigate();
 
   const onInputChange  = (e) => {
     setProvider({...provider,[e.target.name]:e.target.value})
+    setError(ServiceregisterValidation(provider));
 
 }
 
@@ -122,6 +146,7 @@ export const ServiceProviderLogin = () => {
                 value={provider_id}
                 onChange={(e) => onInputChange(e)}
               />
+              {errors.provider_id && <p style={{color: "red", fontSize: "13px" }}>{errors.provider_id}</p>}
               <TextField
                 margin="normal"
                 required
@@ -134,6 +159,7 @@ export const ServiceProviderLogin = () => {
                 value={provider_pwd}
                 onChange={(e) => onInputChange(e)}
               />
+              {errors.provider_pwd && <p style={{color: "red", fontSize: "13px" }}>{errors.provider_pwd}</p>}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"

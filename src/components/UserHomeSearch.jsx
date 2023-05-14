@@ -342,6 +342,7 @@
 import React,  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './userhomesearch.css';
 
 
 export const UserHomeSearch = () => {
@@ -431,7 +432,7 @@ export const UserHomeSearch = () => {
   //     </Link>
   //   ))}
   // </ul>
-  <div>
+  <div className='products'>
     <button onClick={gettempdata}>Fetch Services</button>
               {res.length > 0 &&
   <ul style={{ color: 'white' }}>
@@ -440,11 +441,12 @@ export const UserHomeSearch = () => {
         <li 
           onClick={() => {
             localStorage.setItem('usersearchserviceres', JSON.stringify(item));
-          }}
+          }} //Arjun start from hereS
           style={{ color: 'white' }}
         >
+          {/* <img src={productImage} /> */}
           <h3>{item.providerId}</h3>
-          {/* <p>{item.description}</p> */}
+          <p>{item.serviceDescription}</p>
           {/* <ul>
             {item.reviews.map(review => (
               <li key={review.id}>
