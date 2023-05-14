@@ -50,6 +50,33 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
         navigate('/ServiceProviderHome')
       };
 
+      const handleAccept = async (e) => {
+        e.preventDefault();
+        await axios.post('http://localhost:8082/order/provider_accept?order_id='+order_id)
+        .then((response) => {
+          console.log(response.data);
+          // setRes(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        navigate('/ServiceProviderHome')
+      };
+
+      const handleReject = async (e) => {
+        e.preventDefault();
+        await axios.post('http://localhost:8082/order/provider_reject?order_id='+order_id)
+        .then((response) => {
+          console.log(response.data);
+          // setRes(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        navigate('/ServiceProviderHome')
+      };
+      
+
     const navigate = useNavigate();
     return (
         <div>
@@ -205,9 +232,9 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
             <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
-            <Button variant="contained" color="success">Accept</Button>
-            <Button color="secondary">Reject</Button>
-
+            <Button variant="contained" color="success" onClick={handleAccept}>Accept</Button>
+            <Button color="secondary" onClick={handleReject}>Reject</Button>
+            
             {/* <Button variant="outlined" color="error">
              Error
             </Button> */}

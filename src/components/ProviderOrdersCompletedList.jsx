@@ -20,6 +20,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
 import { StepDescription } from "semantic-ui-react";
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
+
 
 
 
@@ -27,10 +29,17 @@ import axios from "axios";
 
 const theme = createTheme();
 
-export const ServiceDetailAndChatUserSide = () => {
+export const ProviderOrdersCompletedList = (props) => {
     // const theme = createTheme();
     const [startDate, setStartDate] = useState(new Date());
     const [description, setDescription] = useState('');
+
+
+    // const location = useLocation();
+    // console.log("data passed?",location.state);
+    // const {item} = location.state;
+  // const usersearchserviceres = location.state.usersearchserviceres;
+  // console.log("data passed?",item);
     // const [availability, setAvailability] = useState(localStorage.getItem('availability'));
     //   let order = {
     //   availability: '',
@@ -60,7 +69,7 @@ export const ServiceDetailAndChatUserSide = () => {
 
     // const order = JSON.parse(localStorage.getItem('order'));
     // const [orderState, setOrderState] = useState(order);
-  const searchserviceres = JSON.parse(localStorage.getItem('usersearchserviceres'));
+  const providercompletedlist = JSON.parse(localStorage.getItem('providercompletedlist'));
     // console.log("what?:",searchserviceres.order_id);
 
     // const updateOrder = () => {
@@ -73,87 +82,57 @@ export const ServiceDetailAndChatUserSide = () => {
     //   setOrderState(newOrder);
     // };
 
+
+
+
+
+
     const handleSubmit =  async (e) => {
-        // const data = new FormData(event.currentTarget);
-        // console.log({
-        // //   username: data.get('username'),
-        // //   password: data.get('password'),
-        //   description: data.get('description'),
-        //   address: data.get('address'),
-        // });
         
           e.preventDefault();
-          const order_id = parseInt(searchserviceres.order_id);
-          const order_detail = description;
-          
-          console.log("data inside submit from localstorage",order_id,order_detail);
-
-
-          await axios.post('http://localhost:8082/order/user_reply3?order_id='+order_id+'&order_detail3='+order_detail)
-          .then((response) => {
-            console.log(response.data);
-            // setRes(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
-
-
-        // navigate('/userorders', {state:{serviceList}});
-        navigate('/userorders')
-      };
-
-      const handleWithdraw =  async (e) => {
-        // const data = new FormData(event.currentTarget);
-        // console.log({
-        // //   username: data.get('username'),
-        // //   password: data.get('password'),
-        //   description: data.get('description'),
-        //   address: data.get('address'),
-        // });
-        
-          e.preventDefault();
-          const order_id = parseInt(searchserviceres.order_id);
+          // const order_id = parseInt(searchserviceres.order_id);
           // const order_detail = description;
           
           // console.log("data inside submit from localstorage",order_id,order_detail);
 
 
-          await axios.post('http://localhost:8082/order/user_withdraw?order_id='+order_id)
-          .then((response) => {
-            console.log(response.data);
-            // setRes(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
-
+          // await axios.post('http://localhost:8082/order/user_completed_list?order_id='+order_id)
+          // .then((response) => {
+          //   console.log(response.data);
+          //   // setRes(response.data);
+          // })
+          // .catch((error) => {
+          //   console.log(error);
+          // });
 
         // navigate('/userorders', {state:{serviceList}});
-        navigate('/userorders')
+        localStorage.removeItem('providercompletedlist');
+       
+        navigate('/serviceproviderorders')
       };
-      
+
+
+
+
       
       // console.log("description" , description);
     const navigate = useNavigate();
     return (
         <div>
-           <p>Order ID: {searchserviceres.order_id}</p>
-      <p>User ID: {searchserviceres.user_id}</p>
-      <p>Provider Email: {searchserviceres.provider_email}</p>
-      <p>Service Area: {searchserviceres.service_area}</p>
-      <p>Availability: {searchserviceres.availability}</p>
-      <p>Detail Time: {searchserviceres.detail_time}</p>
-      <p>Detail Address: {searchserviceres.detail_add}</p>
-      <p>Service Category: {searchserviceres.service_category}</p>
-      <p>Service Description: {searchserviceres.service_description}</p>
-      <p>Price: {searchserviceres.price}</p>
-      <p>Order Time: {searchserviceres.order_time}</p>
-      <p>Order Status: {searchserviceres.order_status}</p>
-      <p>Order detail coming from sp: {searchserviceres.order_detail2}</p>
-      <p>Order detail coming from sp: {searchserviceres.order_detail4}</p>
+           {/* <p>Order ID: {usersearchserviceres.order_id}</p> */}
+      {/* <p>User ID: {usersearchserviceres.user_id}</p>
+      <p>Provider Email: {usersearchserviceres.provider_email}</p>
+      <p>Service Area: {usersearchserviceres.service_area}</p>
+      <p>Availability: {usersearchserviceres.availability}</p>
+      <p>Detail Time: {usersearchserviceres.detail_time}</p>
+      <p>Detail Address: {usersearchserviceres.detail_add}</p>
+      <p>Service Category: {usersearchserviceres.service_category}</p>
+      <p>Service Description: {usersearchserviceres.service_description}</p>
+      <p>Price: {usersearchserviceres.price}</p>
+      <p>Order Time: {usersearchserviceres.order_time}</p>
+      <p>Order Status: {usersearchserviceres.order_status}</p>
+      <p>Order detail coming from sp: {usersearchserviceres.order_detail2}</p>
+      <p>Order detail coming from sp: {usersearchserviceres.order_detail4}</p> */}
       {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
    
     <ThemeProvider theme={theme}>
@@ -175,27 +154,17 @@ export const ServiceDetailAndChatUserSide = () => {
           </Typography> */}
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
+              <p>Order ID: {providercompletedlist.availability}</p>
+      <p>User ID: {providercompletedlist.price}</p>
+      <p>Provider Email: {providercompletedlist.provider_email}</p>
+      <p>Service Area: {providercompletedlist.provider_id}</p>
+      <p>Availability: {providercompletedlist.service_area}</p>
+      <p>Detail Time: {providercompletedlist.service_category}</p>
+      <p>Detail Address: {providercompletedlist.service_description}</p>
+      <p>Service Category: {providercompletedlist.service_id}</p>
+      {/* <p>Service Description: {usercompletedlist.servicePhoto}</p> */}
+              </Grid>
               <Grid item xs={12}>
                 {/* <TextField
                   required
@@ -221,7 +190,7 @@ export const ServiceDetailAndChatUserSide = () => {
                   id="description"
                   autoComplete="Description"
                 /> */}
-                <TextField
+                {/* <TextField
                 required
                 fullWidth
                 name="description"
@@ -232,7 +201,7 @@ export const ServiceDetailAndChatUserSide = () => {
                 rows={10}
                 // defaultValue="Description"
                 onChange={(event) => setDescription(event.target.value)}
-                />
+                /> */}
               </Grid>
               <Grid item xs={12}>
                 {/* <TextField
@@ -289,10 +258,10 @@ export const ServiceDetailAndChatUserSide = () => {
               </Grid>
             </Grid> */}
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="success" onClick={handleSubmit}>
+            {/* <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
-            <Button color="secondary" onClick={handleWithdraw}>Withdraw</Button>
+            <Button color="secondary">Withdraw</Button> */}
 
             {/* <Button variant="outlined" color="error">
              Error

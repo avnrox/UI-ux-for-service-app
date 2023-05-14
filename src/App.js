@@ -22,6 +22,10 @@ import { Axios } from 'axios';
 import { ServiceProviderAddService } from './ServiceProviderAddService';
 import UserOrders from './components/UserOrders';
 import { UserCompletedList } from './components/UserCompletedList';
+import { UserAcceptedList } from './components/UserAcceptedList';
+import { ServiceProviderOrders } from './components/ServiceProviderOrders';
+import { ProviderOrdersCompletedList } from './components/ProviderOrdersCompletedList';
+import { ProviderOrdersAcceptedList } from './components/ProviderOrdersAcceptedList';
 
 function App() {
   return (
@@ -93,6 +97,10 @@ function App() {
           <Route path="/serviceprovideraddservice" Component={ServiceProviderAddService}/>
           <Route path='/userorders' Component={UserOrders} />
           <Route path="/usercompletedlist" Component={UserCompletedList}/>
+          <Route path="/useracceptedlist" Component={UserAcceptedList}/>
+          <Route path="/serviceproviderorders" Component={ServiceProviderOrders}/>
+          <Route path="/providercompletedlist" Component={ProviderOrdersCompletedList}/>
+          <Route path="/provideracceptedlist" Component={ProviderOrdersAcceptedList}/>
           {/* <Route path="/servicerequest" Component={ServiceRequest}/>  */}
         </Routes>
         </ProSidebarProvider>

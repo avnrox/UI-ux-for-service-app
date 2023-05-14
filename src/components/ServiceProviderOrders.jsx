@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-export const UserOrders = () => {
+export const ServiceProviderOrders = () => {
 
   const [servicelist, setservicelist] = useState([]);
-  const userId = localStorage.getItem("user_id");
+  const providerId = localStorage.getItem("provider_id");
 
   // useEffect(() => {
   //   axios.get('http://localhost:8082?service_area='+servicearea+'&service_category='+servicecategory)
@@ -18,23 +18,12 @@ export const UserOrders = () => {
   //     });
   // }, []);
 
-  const [res, setRes] = useState([]);
-  const gettempdata = async (e) => {
-    e.preventDefault();
-    await axios.post('http://localhost:8082/order/user_pending_list?user_id='+userId)
-    .then((response) => {
-      console.log(response.data);
-      setRes(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  };
+
 
   const [completed, setCompleted] = useState([]);
   const getCompletedData = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:8082/order/user_completed_list?user_id='+userId)
+    await axios.post('http://localhost:8082/order/completed_list?provider_id='+providerId)
     .then((response) => {
       console.log(response.data);
       setCompleted(response.data);
@@ -47,7 +36,7 @@ export const UserOrders = () => {
   const [accepted, setAcctepted] = useState([]);
   const getAcceptedData = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:8082/order/user_accepted_list?user_id='+userId)
+    await axios.post('http://localhost:8082/order/accepted_list?provider_id='+providerId)
     .then((response) => {
       console.log(response.data);
       setAcctepted(response.data);
@@ -80,7 +69,7 @@ export const UserOrders = () => {
   //   ))}
   // </ul>
   <div>
-    <button onClick={gettempdata}>Pending Services</button>
+    {/* <button onClick={gettempdata}>Pending Services</button>
               {res.length > 0 &&
   <ul style={{ color: 'white' }}>
     {res.map(item => (
@@ -92,33 +81,25 @@ export const UserOrders = () => {
           style={{ color: 'white' }}
         >
           <h3>{item.provider_id}</h3>
-          {/* <p>{item.description}</p> */}
-          {/* <ul>
-            {item.reviews.map(review => (
-              <li key={review.id}>
-                <p>{review.text}</p>
-                <p>Rating: {review.rating}/5</p>
-              </li>
-            ))}
-          </ul> */}
+          
         </li>
       </Link>
     ))}
   </ul>
-}
+} */}
 <button onClick={getCompletedData}>Completed Orders</button>
 {completed.length > 0 &&
   <ul style={{ color: 'white' }}>
     {completed.map(item => (
       <Link 
-      to={{pathname:`/usercompletedlist`,
+      to={{pathname:`/providercompletedlist`,
           state: item
         }}
       
       key={item.serviceId}>
         <li 
           onClick={() => {
-            localStorage.setItem('usercompletedlist', JSON.stringify(item));
+            localStorage.setItem('providercompletedlist', JSON.stringify(item));
           }}
           style={{ color: 'white' }}
         >
@@ -142,14 +123,14 @@ export const UserOrders = () => {
   <ul style={{ color: 'white' }}>
     {accepted.map(item => (
       <Link 
-      to={{pathname:`/useracceptedlist`,
+      to={{pathname:`/provideracceptedlist`,
           state: item
         }}
       
       key={item.serviceId}>
         <li 
           onClick={() => {
-            localStorage.setItem('useracceptedlist', JSON.stringify(item));
+            localStorage.setItem('provideracceptedlist', JSON.stringify(item));
           }}
           style={{ color: 'white' }}
         >
@@ -172,4 +153,4 @@ export const UserOrders = () => {
   );
 };
 
-export default UserOrders;
+export default ServiceProviderOrders;

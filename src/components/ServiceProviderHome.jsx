@@ -114,7 +114,7 @@ export const ServiceProviderHome = () => {
     const navigate = useNavigate(); 
     return (
         <div>
-           <Button
+           {/* <Button
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -122,7 +122,7 @@ export const ServiceProviderHome = () => {
                 onClick={gettempdata}
               >
                 temp
-              </Button>
+              </Button> */}
           <Button
                 type="submit"
                 fullWidth

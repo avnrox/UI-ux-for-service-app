@@ -167,14 +167,14 @@ export const ServiceRequestUserSide = () => {
                 rows={4}
                 defaultValue="Address.. Maybe change to proper address type fields.. check notes on onedrive"
                 /> */}
-                <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                {/* <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
         <option value="">Select a category</option>
         {categories.map((category) => (
           <option key={category.id} value={category.name}>
             {category.name}
           </option>
         ))}
-      </select>
+      </select> */}
       <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
         <option value="">Select an area</option>
         {areas.map((area) => (
@@ -214,7 +214,6 @@ export const ServiceRequestUserSide = () => {
             <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
-            <Button color="secondary">Withdraw</Button>
 
             {/* <Button variant="outlined" color="error">
              Error

@@ -35,9 +35,11 @@ export const UserCompletedList = (props) => {
     const [description, setDescription] = useState('');
 
 
-    const location = useLocation();
-  const usersearchserviceres = location.state.usersearchserviceres;
-  console.log("data passed?",usersearchserviceres);
+    // const location = useLocation();
+    // console.log("data passed?",location.state);
+    // const {item} = location.state;
+  // const usersearchserviceres = location.state.usersearchserviceres;
+  // console.log("data passed?",item);
     // const [availability, setAvailability] = useState(localStorage.getItem('availability'));
     //   let order = {
     //   availability: '',
@@ -67,7 +69,7 @@ export const UserCompletedList = (props) => {
 
     // const order = JSON.parse(localStorage.getItem('order'));
     // const [orderState, setOrderState] = useState(order);
-  const searchserviceres = JSON.parse(localStorage.getItem('usersearchserviceres'));
+  const usercompletedlist = JSON.parse(localStorage.getItem('usercompletedlist'));
     // console.log("what?:",searchserviceres.order_id);
 
     // const updateOrder = () => {
@@ -88,22 +90,24 @@ export const UserCompletedList = (props) => {
     const handleSubmit =  async (e) => {
         
           e.preventDefault();
-          const order_id = parseInt(searchserviceres.order_id);
-          const order_detail = description;
+          // const order_id = parseInt(searchserviceres.order_id);
+          // const order_detail = description;
           
-          console.log("data inside submit from localstorage",order_id,order_detail);
+          // console.log("data inside submit from localstorage",order_id,order_detail);
 
 
-          await axios.post('http://localhost:8082/order/user_completed_list?order_id='+order_id)
-          .then((response) => {
-            console.log(response.data);
-            // setRes(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          // await axios.post('http://localhost:8082/order/user_completed_list?order_id='+order_id)
+          // .then((response) => {
+          //   console.log(response.data);
+          //   // setRes(response.data);
+          // })
+          // .catch((error) => {
+          //   console.log(error);
+          // });
 
         // navigate('/userorders', {state:{serviceList}});
+        localStorage.removeItem('usercompletedlist');
+       
         navigate('/userorders')
       };
 
@@ -150,27 +154,17 @@ export const UserCompletedList = (props) => {
           </Typography> */}
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
+              <p>Order ID: {usercompletedlist.availability}</p>
+      <p>User ID: {usercompletedlist.price}</p>
+      <p>Provider Email: {usercompletedlist.provider_email}</p>
+      <p>Service Area: {usercompletedlist.provider_id}</p>
+      <p>Availability: {usercompletedlist.service_area}</p>
+      <p>Detail Time: {usercompletedlist.service_category}</p>
+      <p>Detail Address: {usercompletedlist.service_description}</p>
+      <p>Service Category: {usercompletedlist.service_id}</p>
+      {/* <p>Service Description: {usercompletedlist.servicePhoto}</p> */}
+              </Grid>
               <Grid item xs={12}>
                 {/* <TextField
                   required
@@ -264,10 +258,10 @@ export const UserCompletedList = (props) => {
               </Grid>
             </Grid> */}
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="success" onClick={handleSubmit}>
+            {/* <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
-            <Button color="secondary">Withdraw</Button>
+            <Button color="secondary">Withdraw</Button> */}
 
             {/* <Button variant="outlined" color="error">
              Error

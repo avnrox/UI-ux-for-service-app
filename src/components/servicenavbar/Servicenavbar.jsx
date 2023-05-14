@@ -20,6 +20,17 @@ const Servicenavbar = () => {
     console.log("provider_id",localStorage.getItem("provider_id"))
     };
 
+    const gotoprofile = (event) => {
+      event.preventDefault();
+      // const data = new FormData(event.currentTarget);
+      // console.log({
+      //   username: data.get('username'),
+      //   password: data.get('password'),
+      // });
+      navigate('/serviceproviderorders');
+      
+      };
+
   return (
     <div className="seva__navbar">
       <div className="seva__navbar-links">
@@ -47,7 +58,7 @@ const Servicenavbar = () => {
           <div className="seva__navbar-menu_container-links">
             <p><a href="#home">Home</a></p>
             <p><a href="#wseva">Services</a></p>
-            <p><a href="#features">Orders</a></p>
+            <button type="button" onClick={gotoprofile}>Orders</button>
             <p><a href='#newpagelink'>Add Service</a></p>
             <p><a href="#blog">News</a></p>
           </div>
