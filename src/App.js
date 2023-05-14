@@ -26,6 +26,12 @@ import { UserAcceptedList } from './components/UserAcceptedList';
 import { ServiceProviderOrders } from './components/ServiceProviderOrders';
 import { ProviderOrdersCompletedList } from './components/ProviderOrdersCompletedList';
 import { ProviderOrdersAcceptedList } from './components/ProviderOrdersAcceptedList';
+import AdminNavBar from './components/AdminNavBar'
+import ReviewsPage from './components/AdminReviewsPage';
+import ServiceProviderPage from './components/AdminNewServiceProviderPage';
+import ServiceProviderReviewsPage from './components/AdminServiceProviderReviewsPage';
+import { AdminLogin } from './components/AdminLogin';
+import { ServiceProviderVerification } from './components/ServiceProviderVerification';
 
 function App() {
   return (
@@ -44,6 +50,10 @@ function App() {
             </>
           } />
           <Route path="/login" Component={Login}/>
+          <Route path="/adminnav/*" Component={AdminNavBar}/>
+          <Route path="/viewpage" Component={ReviewsPage}/>
+          <Route path="/service" Component={ServiceProviderPage}/>
+          <Route path="/serviceview" Component={ServiceProviderReviewsPage}/>
           <Route path="/register" element={
             <>
             <div className="gradient__bg">
@@ -80,6 +90,7 @@ function App() {
             <div className="gradient__bg">
               <Navbar />
               <Header/>
+              
             </div>
             <Serviceslogo />
             <Services />
@@ -89,6 +100,7 @@ function App() {
             </>
           } />
           <Route path="/userlogin" Component={UserLogin}/>
+          <Route path="/adminlogin" Component={AdminLogin}/>
           <Route path="/serviceproviderlogin" Component={ServiceProviderLogin}/>
           {/* <Route path="serviceproviderhome" Component={ServiceProviderHome}/> */}
           <Route path="/serviceproviderhome" element={
@@ -116,6 +128,8 @@ function App() {
           <Route path="/serviceproviderorders" Component={ServiceProviderOrders}/>
           <Route path="/providercompletedlist" Component={ProviderOrdersCompletedList}/>
           <Route path="/provideracceptedlist" Component={ProviderOrdersAcceptedList}/>
+          <Route path="/serviceproviderverification" Component={ServiceProviderVerification}/>
+          serviceproviderverification
           {/* <Route path="/servicerequest" Component={ServiceRequest}/>  */}
         </Routes>
         </ProSidebarProvider>
