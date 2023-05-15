@@ -40,6 +40,14 @@ const Navbar = () => {
       // Perform search or other actions here
       navigate('/userorders');
     };
+    const handleUserServices = (event) => {
+      event.preventDefault();
+      navigate('/userhomesearch');
+    };
+    const handleUserHome = (event) => {
+      event.preventDefault();
+      navigate('/userhome');
+    };
 
   return (
     <div className="seva__navbar">
@@ -50,12 +58,13 @@ const Navbar = () => {
         <div className="seva__navbar-links_container">
           {/* <p><a href="#home">Home</a></p>
           <p><a href="#wseva">Services</a></p>
-          <p><a href="#features">Orders</a></p>
-          <p><a href="#blog">News</a></p> */}
-          <button type="button" onClick="#home" >Home</button>
-          <button type="button" onClick="#wseva" >Services</button>
+          <p><a href="#features">Orders</a></p> */}
+          
+          <button type="button" onClick={handleUserHome} >Home</button>
+          <button type="button" onClick={handleUserServices} >Services</button>
           <button type="button" onClick={handleUserOrders} >Orders</button>
-          <button type="button" onClick="#blog" >News</button>
+          <button type="button" onClick={handleUserHome} >News</button>
+          {/* <p><a href="#blog">News</a></p> */}
           {/* please make the buttons work */}
         </div>
       </div>
@@ -70,14 +79,17 @@ const Navbar = () => {
         {toggleMenu && (
         <div className="seva__navbar-menu_container scale-up-center">
           <div className="seva__navbar-menu_container-links">
+          <button type="button" onClick={handleUserHome} >Home</button>
+          <button type="button" onClick={handleUserServices} >Services</button>
+          <button type="button" onClick={handleUserOrders} >Orders</button>
+          <button type="button" onClick={handleUserHome} >News</button>
             {/* <p><a href="#home">Home</a></p>
             <p><a href="#wseva">Services</a></p>
             <button type="button" onClick={handleUserOrders} >Orders</button>
             <p><a href="#blog">News</a></p> */}
           </div>
           <div className="seva__navbar-menu_container-links-sign">
-            <p>Sign Out</p>
-            <button type="button">Profile</button>
+          <button type="button" onClick={handleOnClick}>Sign Out</button>
           </div>
         </div>
         )}
