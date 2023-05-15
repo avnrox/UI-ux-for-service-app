@@ -19,6 +19,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
 import axios from "axios";
+import './serviceprovideraddservice.css';
 
 
 
@@ -183,6 +184,10 @@ export const ServiceProviderAddService = () => {
              
               <Grid item xs={12}>
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
                 required
                 fullWidth
                 name="serviceDescription"
@@ -201,25 +206,16 @@ export const ServiceProviderAddService = () => {
             
                
               <Grid item xs={12}>
-                <h1>Photos</h1>
               </Grid>
               <Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="price"
-                  label="prices"
-                  // type=""
-                  id="price"
-                  autoComplete="prices"
-                  value={price}
-                  onChange={(e) => onInputChange(e)}
-                />
-                </Grid>
+              
                 </Grid>
                 <Grid item xs={12}>
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
                   required
                   fullWidth
                   name="availability"
@@ -232,6 +228,24 @@ export const ServiceProviderAddService = () => {
                 />
                 </Grid>
                 <Grid item xs={12}>
+                <Grid item xs={12}>
+                <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
+                  required
+                  fullWidth
+                  name="price"
+                  label="prices"
+                  // type=""
+                  id="price"
+                  autoComplete="prices"
+                  value={price}
+                  onChange={(e) => onInputChange(e)}
+                />
+                </Grid>
+                  <div className="seva__header-content__input">
                 <select name="serviceArea" value={serviceArea} onChange={onInputChange}>
   {areas.map((area) => (
     <option key={area.id} value={area.name}>
@@ -240,6 +254,7 @@ export const ServiceProviderAddService = () => {
   ))}
 </select>
 
+
 <select name="serviceCategory" value={serviceCategory} onChange={onInputChange}>
   {categories.map((category) => (
     <option key={category.id} value={category.name}>
@@ -247,6 +262,7 @@ export const ServiceProviderAddService = () => {
     </option>
   ))}
 </select>
+</div>
 </Grid>
               <Grid item xs={12}>
             
@@ -262,7 +278,7 @@ export const ServiceProviderAddService = () => {
                 Submit
             </Button>
             <Button variant="contained" color="success">Accept</Button>
-            <Button color="secondary">Reject</Button>
+            <Button variant="contained" color="secondary">Reject</Button>
 
         </Stack>
           </Box>

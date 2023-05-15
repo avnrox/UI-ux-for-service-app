@@ -136,8 +136,8 @@ export const ProviderOrdersCompletedList = (props) => {
       <div className="seva__blog-container_groupB">
         <Servicedetails text={`Order Status:${providercompletedlist.order_status}`} text1={`Price: £${providercompletedlist.price}`} score={`Adress:${providercompletedlist.detail_add}`} />
         <Servicedetails text = 'Description:' text1 = {providercompletedlist.service_description} />
-        <Servicedetails text={`Your Comments:`} text1 = {order_det1} score={order_det3}/>
-        <Servicedetails text={`Service Provider Comments:`} text1={order_det2} score={order_det4}/>
+        <Servicedetails text={`Customer Comments`} text1 = {order_det1} score={order_det3}/>
+        <Servicedetails text={`Your Comments:`} text1={order_det2} score={order_det4}/>
       </div>
     </div>
     </div>

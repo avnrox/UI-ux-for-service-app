@@ -17,7 +17,7 @@ import { ServiceDetailAndChatUserSide } from './components/ServiceDetailAndChatU
 import { Sidebar, Menu, MenuItem, SubMenu, ProSidebarProvider } from 'react-pro-sidebar';
 import { ServiceDetailAndChatServiceProviderSide } from './components/ServiceDetailAndChatServiceProviderSide';
 import { Serviceslogo, Navbar, Servicenavbar} from './components';
-import { Footer, Blog, Features, Services, Header, Firstheader, Serviceheader } from './containers';
+import { Footer, Blog, Features, Services, Header, Firstheader, Serviceheader, Serviceproviderheader } from './containers';
 import { Axios } from 'axios';
 import { ServiceProviderAddService } from './ServiceProviderAddService';
 import {UserOrders } from './components/UserOrders';
@@ -106,12 +106,12 @@ function App() {
             <>
             <div className="gradient__bg">
               <Servicenavbar />
+              <Serviceproviderheader/>
               {/* <Header/> */}
             </div>
             <Serviceslogo />
             <Features />
             <Services />
-            <ServiceProviderHome />
             <Blog />
             <Footer />
             </>
@@ -141,8 +141,30 @@ function App() {
           } />
 
 
-          <Route path="/servicedetailsandchatserviceproviderside" Component={ServiceDetailAndChatServiceProviderSide}/>
-          <Route path="/serviceprovideraddservice" Component={ServiceProviderAddService}/>
+          {/* <Route path="/servicedetailsandchatserviceproviderside" Component={ServiceDetailAndChatServiceProviderSide}/> */}
+          <Route path="/servicedetailsandchatserviceproviderside" element={
+            <>
+            <div className="gradient__bg">
+            <Servicenavbar />
+            <Serviceproviderheader/>
+            <ServiceDetailAndChatServiceProviderSide/>
+            </div>
+            
+            </>
+          } />
+
+
+          {/* <Route path="/serviceprovideraddservice" Component={ServiceProviderAddService}/> */}
+          <Route path="/serviceprovideraddservice" element={
+            <>
+            <div className="gradient__bg">
+            <Servicenavbar />
+            <Firstheader/>
+            <ServiceProviderAddService/>
+            </div>
+            
+            </>
+          } />
 
 
           <Route path="/userorders" element={
@@ -184,7 +206,7 @@ function App() {
             <>
             <div className="gradient__bg">
             <Servicenavbar />
-            <Firstheader/>
+            <Serviceproviderheader/>
             <ServiceProviderOrders/>
             </div>
             
@@ -195,7 +217,7 @@ function App() {
             <>
             <div className="gradient__bg">
             <Servicenavbar />
-            <Firstheader/>
+            <Serviceproviderheader/>
             <ProviderOrdersCompletedList/>
             </div>
             
@@ -207,13 +229,24 @@ function App() {
             <>
             <div className="gradient__bg">
             <Servicenavbar />
-            <Firstheader/>
+            <Serviceproviderheader/>
             <ProviderOrdersAcceptedList/>
             </div>
             
             </>
           } />
-          <Route path="/serviceproviderverification" Component={ServiceProviderVerification}/>
+
+<Route path="/serviceproviderverification" element={
+            <>
+            <div className="gradient__bg">
+            <Servicenavbar />
+            <Firstheader/>
+            <ServiceProviderVerification/>
+            </div>
+            
+            </>
+          } />
+          {/* <Route path="/serviceproviderverification" Component={ServiceProviderVerification}/> */}
           {/* <Route path="/servicerequest" Component={ServiceRequest}/>  */}
         </Routes>
         </ProSidebarProvider>

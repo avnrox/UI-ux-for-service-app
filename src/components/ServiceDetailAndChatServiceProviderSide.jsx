@@ -20,6 +20,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
 import { set } from "date-fns";
 import axios from "axios";
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -39,6 +43,8 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const order_id = parseInt(spchat.order_id);
+        const order_detail = description;
         await axios.post('http://localhost:8082/order/provider_reply?order_id='+order_id+'&order_detail='+description)
         .then((response) => {
           console.log(response.data);
@@ -76,11 +82,36 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
         navigate('/ServiceProviderHome')
       };
       
+      let order_det1 = spchat.order_detail1 || '';
+      let order_det2 = spchat.order_detail2 || '';
+      let order_det3 = spchat.order_detail3 || '';
+      let order_det4 = spchat.order_detail4 || '';
 
     const navigate = useNavigate();
     return (
+      <div className="seva__blog section__padding" id="blog">
+    <div className="seva__blog-heading">
+      <h1 className="gradient__text"> Service <br />Details</h1>
+    </div>
+    <div className="seva__blog-container">
+      <div className="seva__blog-container_groupA">
+        <Article imgUrl={blog01} text={`User: ${spchat.user_id}`} text1 = {`Service: ${spchat.service_category}`}/>
+      </div>
+      <div className="seva__blog-container_groupB">
+      <Servicedetails text={`Order Status:${spchat.order_status}`} text1={`Price: £${spchat.price}`} score={`Adress:${spchat.detail_add}`} />
+        <Servicedetails text = 'Description:' text1 = {spchat.service_description} />
+        <Servicedetails text={`Customer Comments:`} text1 = {order_det1} score={order_det3}/>
+        <Servicedetails text={`Your Comments:`} text1={order_det2} score={order_det4}/>
+      </div>
+    </div>
+
+
+
+
+
+
         <div>
-            <p>Order ID: {spchat.availability}</p>
+            {/* <p>Order ID: {spchat.availability}</p>
       <p>User ID: {spchat.detail_time}</p>
       <p>Provider Email: {spchat.order_id}</p>
       <p>Service Area: {spchat.order_status}</p>
@@ -96,7 +127,7 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
       <p>Det 1 : {spchat.order_detail1}</p>
       <p>Det 2 : {spchat.order_detail2}</p>
       <p>Det 3 : {spchat.order_detail3}</p>
-      <p>Det 4 : {spchat.order_detail4}</p>
+      <p>Det 4 : {spchat.order_detail4}</p> */}
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -163,14 +194,17 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
                   autoComplete="Description"
                 /> */}
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
                 required
                 fullWidth
                 name="description"
                 id="outlined-multiline-static"
-                label="Description"
+                label="Message Customer"
                 multiline
                 rows={10}
-                defaultValue="Description"
                 onChange={(event) => setDescription(event.target.value)}
                 />
               </Grid>
@@ -233,7 +267,7 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
                 Submit
             </Button>
             <Button variant="contained" color="success" onClick={handleAccept}>Accept</Button>
-            <Button color="secondary" onClick={handleReject}>Reject</Button>
+            <Button variant="contained" color="secondary" onClick={handleReject}>Reject</Button>
             
             {/* <Button variant="outlined" color="error">
              Error
@@ -244,6 +278,7 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
         {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
     </ThemeProvider>
+        </div>
         </div>
     )
 }

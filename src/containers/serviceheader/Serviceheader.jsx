@@ -11,8 +11,6 @@ const Serviceheader = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedArea, setSelectedArea] = useState('');
 
-
-
   const navigate = useNavigate();
   const categories = [
     {
@@ -86,10 +84,10 @@ const Serviceheader = () => {
     <div className="seva__header section__padding" id="home">
       <div className="seva__header-content">
         <h1 className="gradient__text">
-          Connecting Services Since 2023{" "}
+          Helping you find perfect Services{" "}
         </h1>
         <p>
-          Finding you the prefect Helpers.
+         Since 2023
         </p>
   
         <div className="seva__header-content__input">
@@ -112,7 +110,6 @@ const Serviceheader = () => {
       <button type="button" onClick={handleOnClick}>
         Search
       </button>
-      
         </div>
       </div>
   

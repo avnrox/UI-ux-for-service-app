@@ -19,6 +19,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
 import axios from "axios";
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -176,11 +180,15 @@ export const ServiceProviderVerification = () => {
              
               <Grid item xs={12}>
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
                 required
                 fullWidth
                 name="description"
                 id="outlined-multiline-static"
-                label="description"
+                label="Review Request"
                 // value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
                 multiline
                 rows={10}

@@ -1,11 +1,13 @@
+//import hoomans from '../../assets/humans.png';
+import comunity from '../../assets/comunity2.png';
+import './serviceproviderheader.css';
 import React, { useState , useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import axios from "axios";
 
 
-export const ServiceProviderHome = () => {
-    
+export  const Serviceproviderheader = () => {
   const provider_id = localStorage.getItem("provider_id");
   const navigate = useNavigate();
 
@@ -23,11 +25,16 @@ export const ServiceProviderHome = () => {
   };
 
   return (
-    <div>
-      
+
+
+  <div className="seva__header section__padding" id="home">
+    <div className="seva__header-content">
+      <h1 className="gradient__text">Connecting Buissness Since 2023 </h1>
+      <p>Helping Local Buisness bloom into greater hights </p>
+      <div className='seva__navbar-links_container'>
       <button onClick={gettempdata}>Fetch Services</button>
       {res.length > 0 && (
-        <ul style={{ color: 'white' }}>
+        <ul >
           {res.map(item => (
             <Link to={`/servicedetailsandchatserviceproviderside`} key={item.serviceId}>
               <li 
@@ -42,6 +49,14 @@ export const ServiceProviderHome = () => {
           ))}
         </ul>
       )}
+      </div>
     </div>
+
+    <div className="seva__header-image">
+      <img src={comunity} alt='connecting people'/>
+    </div>
+  </div>
   );
 };
+
+export default Serviceproviderheader;
