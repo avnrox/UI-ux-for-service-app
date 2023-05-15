@@ -454,7 +454,7 @@ export const UserHomeSearch = () => {
           <p>{item.score}</p>
           </div> */}
           <div className="seva__blog-container_groupB">
-          <Article imgUrl={blog02} date={item.providerId} text={`Availability:${item.availability}`} text1={`Price:${item.price}`} score={`Average Rating:${item.score}`} reviews={item.content}/>
+          <Article imgUrl={blog02} text={item.provider_id} text1={`Availability:${item.availability}`} text2={`Price:${item.price}`} score={`Average Rating:${item.score}`} reviews={item.content}/>
           {/* <Article imgUrl={blog03} date={item.providerId} text={`Availability: ${item.availability}`}/> */}
           {/* <Article imgUrl={blog04} date={item.providerId} text="sdfjhagskjdfhsjkf sdkhfjksdhf jkshfk jshdfkjs hfjk" />
           <Article imgUrl={blog05} date={item.providerId} text="sdhfgshjdfhgsjk sdkjhfjksah fjksdfjk hsdjkfh sjkfh kjasfhkj" /> */}

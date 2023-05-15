@@ -88,6 +88,10 @@ export const UserCompletedList = (props) => {
     // };
 
 
+    let order_det1 = usercompletedlist.order_detail1 || '';
+      let order_det2 = usercompletedlist.order_detail2 || '';
+      let order_det3 = usercompletedlist.order_detail3 || '';
+      let order_det4 = usercompletedlist.order_detail4 || '';
 
 
 
@@ -129,13 +133,13 @@ export const UserCompletedList = (props) => {
     </div>
     <div className="seva__blog-container">
       <div className="seva__blog-container_groupA">
-        <Article imgUrl={blog01} date={usercompletedlist.availability} text={usercompletedlist.provider_email} text1 = {`Service:${usercompletedlist.service_category}`}/>
+        <Article imgUrl={blog01} text={usercompletedlist.provider_email} text1 = {`Service:${usercompletedlist.service_category}`}/>
       </div>
       <div className="seva__blog-container_groupB">
       <Servicedetails text={`Order Status:${usercompletedlist.order_status}`} text1={`Price: £${usercompletedlist.price}`} score={`Adress:${usercompletedlist.detail_add}`} />
         <Servicedetails text = 'Description:' text1 = {usercompletedlist.service_description} />
-        <Servicedetails text={`Your Comments:`} text1 = {`${usercompletedlist.order_detail1}`} score={`${usercompletedlist.order_detail3}`}/>
-        <Servicedetails text={`Service Provider Comments:`} text1={`${usercompletedlist.order_detail2}`} score={`${usercompletedlist.order_detail4}`}/>
+        <Servicedetails text={`Your Comments:`} text1 = {order_det1} score={order_det3}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={order_det2} score={order_det4}/>
       </div>
     </div>
     <div></div>

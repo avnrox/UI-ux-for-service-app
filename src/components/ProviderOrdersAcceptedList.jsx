@@ -21,6 +21,10 @@ import Stack from '@mui/material/Stack';
 import { StepDescription } from "semantic-ui-react";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -113,13 +117,32 @@ export const ProviderOrdersAcceptedList = (props) => {
       };
 
 
-
+      let order_det1 = provideracceptedlist.order_detail1 || '';
+      let order_det2 = provideracceptedlist.order_detail2 || '';
+      let order_det3 = provideracceptedlist.order_detail3 || '';
+      let order_det4 = provideracceptedlist.order_detail4 || '';
 
       
       // console.log("description" , description);
     const navigate = useNavigate();
     return (
         <div>
+          <div className="seva__blog section__padding" id="blog">
+    <div className="seva__blog-heading">
+      <h1 className="gradient__text"> Service <br />Details</h1>
+    </div>
+    <div className="seva__blog-container">
+      <div className="seva__blog-container_groupA">
+        <Article imgUrl={blog01} text={provideracceptedlist.user_id} text1 = {`Service:${provideracceptedlist.service_category}`}/>
+      </div>
+      <div className="seva__blog-container_groupB">
+        <Servicedetails text={`Order Status:${provideracceptedlist.order_status}`} text1={`Price: £${provideracceptedlist.price}`} score={`Adress:${provideracceptedlist.detail_add}`} />
+        <Servicedetails text = 'Description:' text1 = {provideracceptedlist.service_description} />
+        <Servicedetails text={`Your Comments:`} text1 = {order_det1} score={order_det3}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={order_det2} score={order_det4}/>
+      </div>
+    </div>
+    </div>
            {/* <p>Order ID: {usersearchserviceres.order_id}</p> */}
       {/* <p>User ID: {usersearchserviceres.user_id}</p>
       <p>Provider Email: {usersearchserviceres.provider_email}</p>
@@ -156,14 +179,14 @@ export const ProviderOrdersAcceptedList = (props) => {
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-              <p>Order ID: {provideracceptedlist.availability}</p>
+              {/* <p>Order ID: {provideracceptedlist.availability}</p>
       <p>User ID: {provideracceptedlist.price}</p>
       <p>Provider Email: {provideracceptedlist.provider_email}</p>
       <p>Service Area: {provideracceptedlist.provider_id}</p>
       <p>Availability: {provideracceptedlist.service_area}</p>
       <p>Detail Time: {provideracceptedlist.service_category}</p>
       <p>Detail Address: {provideracceptedlist.service_description}</p>
-      <p>Service Category: {provideracceptedlist.service_id}</p>
+      <p>Service Category: {provideracceptedlist.service_id}</p> */}
       {/* <p>Service Description: {usercompletedlist.servicePhoto}</p> */}
               </Grid>
               <Grid item xs={12}>

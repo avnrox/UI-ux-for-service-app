@@ -139,7 +139,11 @@ export const ServiceDetailAndChatUserSide = () => {
         navigate('/userorders')
       };
       
-      
+      let order_det1 = searchserviceres.order_detail1 || '';
+      let order_det2 = searchserviceres.order_detail2 || '';
+      let order_det3 = searchserviceres.order_detail3 || '';
+      let order_det4 = searchserviceres.order_detail4 || '';
+
       // console.log("description" , description);
     const navigate = useNavigate();
     return (
@@ -149,13 +153,13 @@ export const ServiceDetailAndChatUserSide = () => {
     </div>
     <div className="seva__blog-container">
       <div className="seva__blog-container_groupA">
-        <Article imgUrl={blog01} date={searchserviceres.availability} text={searchserviceres.provider_email} text1 = {`Service:${searchserviceres.service_category}`}/>
+        <Article imgUrl={blog01} text={searchserviceres.provider_email} text1 = {`Service:${searchserviceres.service_category}`}/>
       </div>
       <div className="seva__blog-container_groupB">
       <Servicedetails text={`Order Status:${searchserviceres.order_status}`} text1={`Price: £${searchserviceres.price}`} score={`Adress:${searchserviceres.detail_add}`} />
         <Servicedetails text = 'Description:' text1 = {searchserviceres.service_description} />
-        <Servicedetails text={`Your Comments:`} text1 = {`${searchserviceres.order_detail1}`} score={`${searchserviceres.order_detail3}`}/>
-        <Servicedetails text={`Service Provider Comments:`} text1={`${searchserviceres.order_detail2}`} score={`${searchserviceres.order_detail4}`}/>
+        <Servicedetails text={`Your Comments:`} text1 = {order_det1} score={order_det3}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={order_det2} score={order_det4}/>
       </div>
     </div>
 

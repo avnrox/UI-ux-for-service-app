@@ -37,7 +37,8 @@ export const UserRegister = () => {
   const [user,setUser] = useState({
     userId:"",
     userPwd:"",
-    email:""
+    email:"",
+    confirmPwd: "",
   })
   const [errors, setError] = useState({})
   const valdn = errors.userId;
@@ -45,6 +46,10 @@ export const UserRegister = () => {
 
   const{userId, userPwd, email}=user
   const navigate = useNavigate();
+
+  const onConfirmPwdChange = (e) => {
+    setUser({ ...user, confirmPwd: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,6 +63,11 @@ export const UserRegister = () => {
       valdp === "Password field cant be empty" ||
       valdp === "Password needs atleast 4 charectors"){
         //stop navigation.
+      }
+      else if (user.userPwd !== user.confirmPwd){
+        // setError({ confirmPwd: "Passwords do not match" });
+        window.alert("Passwords do not match");
+        return;
       }
       else if(errors.userId === "\u2713" && errors.userPwd === "\u2713") {
         await axios.post("http://localhost:8082/users/register", user)
@@ -178,12 +188,19 @@ export const UserRegister = () => {
                 />
                 {errors.userPwd && <p style={{color: "red", fontSize: "13px" }}>{errors.userPwd}</p>}
               </Grid>
-              {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid> */}
+              <Grid item xs={12}>
+  <TextField
+    required
+    fullWidth
+    name="confirmPwd"
+    label="Confirm Password"
+    type="password"
+    id="confirmPwd"
+    autoComplete="new-password"
+    value={user.confirmPwd}
+    onChange={onConfirmPwdChange}
+  />
+</Grid>
             </Grid>
             <Button
               type="submit"

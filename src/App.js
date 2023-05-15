@@ -179,11 +179,41 @@ function App() {
           } />
 
 
-          <Route path="/serviceproviderorders" Component={ServiceProviderOrders}/>
-          <Route path="/providercompletedlist" Component={ProviderOrdersCompletedList}/>
-          <Route path="/provideracceptedlist" Component={ProviderOrdersAcceptedList}/>
+          {/* <Route path="/serviceproviderorders" Component={ServiceProviderOrders}/> */}
+          <Route path="/serviceproviderorders" element={
+            <>
+            <div className="gradient__bg">
+            <Servicenavbar />
+            <Firstheader/>
+            <ServiceProviderOrders/>
+            </div>
+            
+            </>
+          } />
+          {/* <Route path="/providercompletedlist" Component={ProviderOrdersCompletedList}/> */}
+          <Route path="/providercompletedlist" element={
+            <>
+            <div className="gradient__bg">
+            <Servicenavbar />
+            <Firstheader/>
+            <ProviderOrdersCompletedList/>
+            </div>
+            
+            </>
+          } />
+
+          {/* <Route path="/provideracceptedlist" Component={ProviderOrdersAcceptedList}/> */}
+          <Route path="/provideracceptedlist" element={
+            <>
+            <div className="gradient__bg">
+            <Servicenavbar />
+            <Firstheader/>
+            <ProviderOrdersAcceptedList/>
+            </div>
+            
+            </>
+          } />
           <Route path="/serviceproviderverification" Component={ServiceProviderVerification}/>
-          serviceproviderverification
           {/* <Route path="/servicerequest" Component={ServiceRequest}/>  */}
         </Routes>
         </ProSidebarProvider>

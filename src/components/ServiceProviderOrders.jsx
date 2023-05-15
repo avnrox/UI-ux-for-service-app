@@ -1,6 +1,7 @@
 import React,  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../components/navbar/navbar.css';
 
 
 export const ServiceProviderOrders = () => {
@@ -68,25 +69,7 @@ export const ServiceProviderOrders = () => {
   //     </Link>
   //   ))}
   // </ul>
-  <div>
-    {/* <button onClick={gettempdata}>Pending Services</button>
-              {res.length > 0 &&
-  <ul style={{ color: 'white' }}>
-    {res.map(item => (
-      <Link to={`/servicedetailsandchatuserside`} key={item.serviceId}>
-        <li 
-          onClick={() => {
-            localStorage.setItem('usersearchserviceres', JSON.stringify(item));
-          }}
-          style={{ color: 'white' }}
-        >
-          <h3>{item.provider_id}</h3>
-          
-        </li>
-      </Link>
-    ))}
-  </ul>
-} */}
+  <div className='seva__navbar-links_container'>
 <button onClick={getCompletedData}>Completed Orders</button>
 {completed.length > 0 &&
   <ul style={{ color: 'white' }}>

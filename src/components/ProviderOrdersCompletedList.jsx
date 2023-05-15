@@ -21,7 +21,10 @@ import Stack from '@mui/material/Stack';
 import { StepDescription } from "semantic-ui-react";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
-
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -112,28 +115,32 @@ export const ProviderOrdersCompletedList = (props) => {
       };
 
 
-
+      let order_det1 = providercompletedlist.order_detail1 || '';
+      let order_det2 = providercompletedlist.order_detail2 || '';
+      let order_det3 = providercompletedlist.order_detail3 || '';
+      let order_det4 = providercompletedlist.order_detail4 || '';
 
       
       // console.log("description" , description);
     const navigate = useNavigate();
     return (
         <div>
-           {/* <p>Order ID: {usersearchserviceres.order_id}</p> */}
-      {/* <p>User ID: {usersearchserviceres.user_id}</p>
-      <p>Provider Email: {usersearchserviceres.provider_email}</p>
-      <p>Service Area: {usersearchserviceres.service_area}</p>
-      <p>Availability: {usersearchserviceres.availability}</p>
-      <p>Detail Time: {usersearchserviceres.detail_time}</p>
-      <p>Detail Address: {usersearchserviceres.detail_add}</p>
-      <p>Service Category: {usersearchserviceres.service_category}</p>
-      <p>Service Description: {usersearchserviceres.service_description}</p>
-      <p>Price: {usersearchserviceres.price}</p>
-      <p>Order Time: {usersearchserviceres.order_time}</p>
-      <p>Order Status: {usersearchserviceres.order_status}</p>
-      <p>Order detail coming from sp: {usersearchserviceres.order_detail2}</p>
-      <p>Order detail coming from sp: {usersearchserviceres.order_detail4}</p> */}
-      {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
+          <div className="seva__blog section__padding" id="blog">
+    <div className="seva__blog-heading">
+      <h1 className="gradient__text"> Service <br />Details</h1>
+    </div>
+    <div className="seva__blog-container">
+      <div className="seva__blog-container_groupA">
+        <Article imgUrl={blog01} text={providercompletedlist.user_id} text1 = {`Service:${providercompletedlist.service_category}`}/>
+      </div>
+      <div className="seva__blog-container_groupB">
+        <Servicedetails text={`Order Status:${providercompletedlist.order_status}`} text1={`Price: £${providercompletedlist.price}`} score={`Adress:${providercompletedlist.detail_add}`} />
+        <Servicedetails text = 'Description:' text1 = {providercompletedlist.service_description} />
+        <Servicedetails text={`Your Comments:`} text1 = {order_det1} score={order_det3}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={order_det2} score={order_det4}/>
+      </div>
+    </div>
+    </div>
    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -155,14 +162,14 @@ export const ProviderOrdersCompletedList = (props) => {
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-              <p>Order ID: {providercompletedlist.availability}</p>
+              {/* <p>Order ID: {providercompletedlist.availability}</p>
       <p>User ID: {providercompletedlist.price}</p>
       <p>Provider Email: {providercompletedlist.provider_email}</p>
       <p>Service Area: {providercompletedlist.provider_id}</p>
       <p>Availability: {providercompletedlist.service_area}</p>
       <p>Detail Time: {providercompletedlist.service_category}</p>
       <p>Detail Address: {providercompletedlist.service_description}</p>
-      <p>Service Category: {providercompletedlist.service_id}</p>
+      <p>Service Category: {providercompletedlist.service_id}</p> */}
       {/* <p>Service Description: {usercompletedlist.servicePhoto}</p> */}
               </Grid>
               <Grid item xs={12}>
@@ -275,19 +282,4 @@ export const ProviderOrdersCompletedList = (props) => {
         </div>
     )
 }
-
-const Service = [
-    { label: 'Cleaning', id: 1 },
-    { label: 'Babysitting', id: 2 },
-    { label: 'Pest Control', id: 3 },
-    { label: 'Plumbing', id: 4 },
-    { label: 'Electrical Repairs', id: 5 },
-    { label: 'Beauty', id: 6 },
-  ];
-  const Area = [
-    { label: 'Southampton', id: 1 },
-    { label: 'London', id: 2 },
-    { label: 'Manchester', id: 3 },
-    { label: 'Edinburgh', id: 4 },
-  ];
   

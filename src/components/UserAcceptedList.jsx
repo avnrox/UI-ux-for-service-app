@@ -115,7 +115,10 @@ export const UserAcceptedList = (props) => {
         navigate('/userorders')
       };
 
-
+      let order_det1 = useraccepted.order_detail1 || '';
+      let order_det2 = useraccepted.order_detail2 || '';
+      let order_det3 = useraccepted.order_detail3 || '';
+      let order_det4 = useraccepted.order_detail4 || '';
 
 
       
@@ -128,13 +131,13 @@ export const UserAcceptedList = (props) => {
     </div>
     <div className="seva__blog-container">
       <div className="seva__blog-container_groupA">
-        <Article imgUrl={blog01} date={useraccepted.availability} text={useraccepted.provider_email} text1 = {`Service:${useraccepted.service_category}`}/>
+        <Article imgUrl={blog01} text={useraccepted.provider_email} text1 = {`Service:${useraccepted.service_category}`}/>
       </div>
       <div className="seva__blog-container_groupB">
         <Servicedetails text={`Order Status:${useraccepted.order_status}`} text1={`Price: £${useraccepted.price}`} score={`Adress:${useraccepted.detail_add}`} />
         <Servicedetails text = 'Description:' text1 = {useraccepted.service_description} />
-        <Servicedetails text={`Your Comments:`} text1 = {`${useraccepted.order_detail1}`} score={`${useraccepted.order_detail3}`}/>
-        <Servicedetails text={`Service Provider Comments:`} text1={`${useraccepted.order_detail2}`} score={`${useraccepted.order_detail4}`}/>
+        <Servicedetails text={`Your Comments:`} text1 = {order_det1} score={order_det3}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={order_det2} score={order_det4}/>
       </div>
     </div>
         <div>
@@ -281,19 +284,3 @@ export const UserAcceptedList = (props) => {
         </div>
     )
 }
-
-const Service = [
-    { label: 'Cleaning', id: 1 },
-    { label: 'Babysitting', id: 2 },
-    { label: 'Pest Control', id: 3 },
-    { label: 'Plumbing', id: 4 },
-    { label: 'Electrical Repairs', id: 5 },
-    { label: 'Beauty', id: 6 },
-  ];
-  const Area = [
-    { label: 'Southampton', id: 1 },
-    { label: 'London', id: 2 },
-    { label: 'Manchester', id: 3 },
-    { label: 'Edinburgh', id: 4 },
-  ];
-  
