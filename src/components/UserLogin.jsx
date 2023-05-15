@@ -118,7 +118,7 @@ export const UserLogin = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage: 'url(https://source.unsplash.com/random?admin)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -169,10 +169,10 @@ export const UserLogin = () => {
                 onChange={(e) => onInputChange(e)}
               />
               {errors.user_pwd && <p style={{color: "red", fontSize: "13px" }}>{errors.user_pwd}</p>}
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
