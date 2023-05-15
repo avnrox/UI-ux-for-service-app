@@ -1,6 +1,7 @@
 import React,  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../components/navbar/navbar.css';
 
 
 export const UserOrders = () => {
@@ -79,7 +80,7 @@ export const UserOrders = () => {
   //     </Link>
   //   ))}
   // </ul>
-  <div>
+  <div className='seva__navbar-links_container'>
     <button onClick={gettempdata}>Pending Services</button>
               {res.length > 0 &&
   <ul style={{ color: 'white' }}>
@@ -91,7 +92,8 @@ export const UserOrders = () => {
           }}
           style={{ color: 'white' }}
         >
-          <h3>{item.provider_id}</h3>
+          <h3>{item.service_category}</h3>
+          <p>{item.provider_id}</p>
           {/* <p>{item.description}</p> */}
           {/* <ul>
             {item.reviews.map(review => (
@@ -101,6 +103,7 @@ export const UserOrders = () => {
               </li>
             ))}
           </ul> */}
+          <span style={{ marginRight: '100px' }}></span>
         </li>
       </Link>
     ))}
@@ -122,7 +125,8 @@ export const UserOrders = () => {
           }}
           style={{ color: 'white' }}
         >
-          <h3>{item.provider_id}</h3>
+          <h3>{item.service_category}</h3>
+          <p>{item.provider_id}</p>
           {/* <p>{item.description}</p> */}
           {/* <ul>
             {item.reviews.map(review => (
@@ -132,6 +136,7 @@ export const UserOrders = () => {
               </li>
             ))}
           </ul> */}
+          <span style={{ marginRight: '100px' }}></span>
         </li>
       </Link>
     ))}
@@ -153,7 +158,8 @@ export const UserOrders = () => {
           }}
           style={{ color: 'white' }}
         >
-          <h3>{item.provider_id}</h3>
+          <h3>{item.service_category}</h3>
+          <p>{item.provider_id}</p>
           {/* <p>{item.description}</p> */}
           {/* <ul>
             {item.reviews.map(review => (
@@ -163,6 +169,7 @@ export const UserOrders = () => {
               </li>
             ))}
           </ul> */}
+          <span style={{ marginRight: '100px' }}></span>
         </li>
       </Link>
     ))}

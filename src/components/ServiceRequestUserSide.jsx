@@ -19,7 +19,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -59,19 +62,43 @@ export const ServiceRequestUserSide = () => {
 
     const navigate = useNavigate();
     return (
-        <div>
-            <p>Order ID: {searchserviceres.availability}</p>
-      <p>User ID: {searchserviceres.price}</p>
-      <p>Provider Email: {searchserviceres.providerEmail}</p>
-      <p>Service Area: {searchserviceres.providerId}</p>
-      <p>Availability: {searchserviceres.serviceArea}</p>
-      <p>Detail Time: {searchserviceres.serviceCategory}</p>
-      <p>Detail Address: {searchserviceres.serviceDescription}</p>
-      <p>Service Category: {searchserviceres.serviceId}</p>
-      <p>Service Description: {searchserviceres.servicePhoto}</p>
+      <div className="seva__blog section__padding" id="blog">
+    <div className="seva__blog-heading">
+      <h1 className="gradient__text"> Service <br />Details</h1>
+    </div>
+    <div className="seva__blog-container">
+      <div className="seva__blog-container_groupA">
+        <Article imgUrl={blog01} text={searchserviceres.provider_email} text1 = {`Service:${searchserviceres.service_category}`}/>
+      </div>
+      <div className="seva__blog-container_groupB">
+        <Servicedetails text={`Availability:`} text1={`${searchserviceres.availability}`}/>
+        <Servicedetails text = 'Description:' text1 = {searchserviceres.service_description}/>
+        <Servicedetails text={`Price:`} text1 = {`£${searchserviceres.price}`}/>
+        <Servicedetails text={`Area:`} text1={`${searchserviceres.service_area}`} />
+      </div>
+    </div>
+    <div>
+      {/* The bellow commented section is for chat use in other pages */}
+      {/* <div className="">
+      <div className="seva_chat">
+
+            <p>{searchserviceres.providerId}: {searchserviceres.availability}</p>
+            <p>User ID: {searchserviceres.price}</p>
+            <p>Provider Email: {searchserviceres.providerEmail}</p>
+            <p>Service Area: {searchserviceres.providerId}</p>
+            <p>Availability: {searchserviceres.serviceArea}</p>
+            <p>Detail Time: {searchserviceres.serviceCategory}</p>
+            <p>Detail Address: {searchserviceres.serviceDescription}</p>
+            <p>Service Category: {searchserviceres.serviceId}</p>
+            <p>Service Description: {searchserviceres.servicePhoto}</p>
+            </div>
+            </div> */}
+
+
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <div >
         <Box
           sx={{
             marginTop: 8,
@@ -136,14 +163,18 @@ export const ServiceRequestUserSide = () => {
                   autoComplete="Description"
                 /> */}
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+                }
                 required
                 fullWidth
                 name="description"
                 id="outlined-multiline-static"
-                label="Description"
+                label="Message provider"
                 multiline
                 rows={4}
-                defaultValue="Description"
+                // defaultValue="Messeage provide"
                 onChange={(event) => setDescription(event.target.value)}
                 />
               </Grid>
@@ -175,14 +206,28 @@ export const ServiceRequestUserSide = () => {
           </option>
         ))}
       </select> */}
-      <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
+      {/* <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
         <option value="">Select an area</option>
         {areas.map((area) => (
           <option key={area.id} value={area.name}>
             {area.name}
           </option>
         ))}
-      </select>
+      </select> */}
+      <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+                }
+                required
+                fullWidth
+                name="address"
+                id="outlined-multiline-static"
+                label="Destination Address"
+                multiline
+                rows={4}
+                onChange={(e) => setSelectedArea(e.target.value)}
+                />
               </Grid>
               <Grid item xs={12}>
                 {/* <FormControlLabel
@@ -222,8 +267,10 @@ export const ServiceRequestUserSide = () => {
           </Box>
         </Box>
         {/* <Copyright sx={{ mt: 5 }} /> */}
+        </div>
       </Container>
     </ThemeProvider>
+        </div>
         </div>
     )
 }

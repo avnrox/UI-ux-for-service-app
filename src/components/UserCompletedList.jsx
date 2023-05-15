@@ -21,7 +21,10 @@ import Stack from '@mui/material/Stack';
 import { StepDescription } from "semantic-ui-react";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
-
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -120,7 +123,23 @@ export const UserCompletedList = (props) => {
       // console.log("description" , description);
     const navigate = useNavigate();
     return (
-        <div>
+          <div className="seva__blog section__padding" id="blog">
+    <div className="seva__blog-heading">
+      <h1 className="gradient__text"> Service <br />Details</h1>
+    </div>
+    <div className="seva__blog-container">
+      <div className="seva__blog-container_groupA">
+        <Article imgUrl={blog01} date={usercompletedlist.availability} text={usercompletedlist.provider_email} text1 = {`Service:${usercompletedlist.service_category}`}/>
+      </div>
+      <div className="seva__blog-container_groupB">
+      <Servicedetails text={`Order Status:${usercompletedlist.order_status}`} text1={`Price: £${usercompletedlist.price}`} score={`Adress:${usercompletedlist.detail_add}`} />
+        <Servicedetails text = 'Description:' text1 = {usercompletedlist.service_description} />
+        <Servicedetails text={`Your Comments:`} text1 = {`${usercompletedlist.order_detail1}`} score={`${usercompletedlist.order_detail3}`}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={`${usercompletedlist.order_detail2}`} score={`${usercompletedlist.order_detail4}`}/>
+      </div>
+    </div>
+    <div></div>
+
            {/* <p>Order ID: {usersearchserviceres.order_id}</p> */}
       {/* <p>User ID: {usersearchserviceres.user_id}</p>
       <p>Provider Email: {usersearchserviceres.provider_email}</p>
@@ -136,6 +155,25 @@ export const UserCompletedList = (props) => {
       <p>Order detail coming from sp: {usersearchserviceres.order_detail2}</p>
       <p>Order detail coming from sp: {usersearchserviceres.order_detail4}</p> */}
       {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
+      <div>
+      {/* <div className="seva_chat"> */}
+      {/* <p>Order ID: {usercompletedlist.order_id}</p> */}
+      {/* <p>User ID: {searchserviceres.user_id}</p>
+      <p>Provider Email: {searchserviceres.provider_email}</p>
+      <p>Service Area: {searchserviceres.service_area}</p>
+      <p>Availability: {searchserviceres.availability}</p>
+      <p>Detail Time: {searchserviceres.detail_time}</p>
+      <p>Detail Address: {searchserviceres.detail_add}</p>
+      <p>Service Category: {searchserviceres.service_category}</p>
+      <p>Service Description: {searchserviceres.service_description}</p>
+      <p>Price: {searchserviceres.price}</p>
+      <p>Order Time: {searchserviceres.order_time}</p> */}
+      {/* <p>Order Status: {usercompletedlist.order_status}</p> */}
+      {/* <p>Past messages from Service Provider: {usercompletedlist.provider_email}</p> */}
+      {/* <p>{usercompletedlist.order_detail2}</p> */}
+      {/* <p>{usercompletedlist.order_detail1}</p> */}
+      {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
+      {/* </div> */}
    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -156,7 +194,7 @@ export const UserCompletedList = (props) => {
           </Typography> */}
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
               <p>Order ID: {usercompletedlist.availability}</p>
       <p>User ID: {usercompletedlist.price}</p>
       <p>Provider Email: {usercompletedlist.provider_email}</p>
@@ -164,9 +202,9 @@ export const UserCompletedList = (props) => {
       <p>Availability: {usercompletedlist.service_area}</p>
       <p>Detail Time: {usercompletedlist.service_category}</p>
       <p>Detail Address: {usercompletedlist.service_description}</p>
-      <p>Service Category: {usercompletedlist.service_id}</p>
+      <p>Service Category: {usercompletedlist.service_id}</p> */}
       {/* <p>Service Description: {usercompletedlist.servicePhoto}</p> */}
-              </Grid>
+              {/* </Grid> */}
               <Grid item xs={12}>
                 {/* <TextField
                   required
@@ -193,6 +231,10 @@ export const UserCompletedList = (props) => {
                   autoComplete="Description"
                 /> */}
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
                 required
                 fullWidth
                 name="score"
@@ -205,11 +247,15 @@ export const UserCompletedList = (props) => {
                 onChange={(event) => setScore(event.target.value)}
                 />
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
                 required
                 fullWidth
-                name="description"
+                name="content"
                 id="outlined-multiline-static"
-                label="Description"
+                label="Review"
                 // value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
                 multiline
                 rows={10}
@@ -285,6 +331,7 @@ export const UserCompletedList = (props) => {
         {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
     </ThemeProvider>
+        </div>
         </div>
     )
 }

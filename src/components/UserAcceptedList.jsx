@@ -21,6 +21,10 @@ import Stack from '@mui/material/Stack';
 import { StepDescription } from "semantic-ui-react";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -118,22 +122,31 @@ export const UserAcceptedList = (props) => {
       // console.log("description" , description);
     const navigate = useNavigate();
     return (
+      <div className="seva__blog section__padding" id="blog">
+    <div className="seva__blog-heading">
+      <h1 className="gradient__text"> Service <br />Details</h1>
+    </div>
+    <div className="seva__blog-container">
+      <div className="seva__blog-container_groupA">
+        <Article imgUrl={blog01} date={useraccepted.availability} text={useraccepted.provider_email} text1 = {`Service:${useraccepted.service_category}`}/>
+      </div>
+      <div className="seva__blog-container_groupB">
+        <Servicedetails text={`Order Status:${useraccepted.order_status}`} text1={`Price: £${useraccepted.price}`} score={`Adress:${useraccepted.detail_add}`} />
+        <Servicedetails text = 'Description:' text1 = {useraccepted.service_description} />
+        <Servicedetails text={`Your Comments:`} text1 = {`${useraccepted.order_detail1}`} score={`${useraccepted.order_detail3}`}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={`${useraccepted.order_detail2}`} score={`${useraccepted.order_detail4}`}/>
+      </div>
+    </div>
         <div>
-           {/* <p>Order ID: {usersearchserviceres.order_id}</p> */}
-      {/* <p>User ID: {usersearchserviceres.user_id}</p>
-      <p>Provider Email: {usersearchserviceres.provider_email}</p>
-      <p>Service Area: {usersearchserviceres.service_area}</p>
-      <p>Availability: {usersearchserviceres.availability}</p>
-      <p>Detail Time: {usersearchserviceres.detail_time}</p>
-      <p>Detail Address: {usersearchserviceres.detail_add}</p>
-      <p>Service Category: {usersearchserviceres.service_category}</p>
-      <p>Service Description: {usersearchserviceres.service_description}</p>
-      <p>Price: {usersearchserviceres.price}</p>
-      <p>Order Time: {usersearchserviceres.order_time}</p>
-      <p>Order Status: {usersearchserviceres.order_status}</p>
-      <p>Order detail coming from sp: {usersearchserviceres.order_detail2}</p>
-      <p>Order detail coming from sp: {usersearchserviceres.order_detail4}</p> */}
-      {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
+        {/* <div className="seva_chat">
+           <p>Order ID: {useraccepted.order_id}</p>
+      <p>Order Status: {useraccepted.order_status}</p>
+      <p>Past Messages from Service Provider: {useraccepted.provider_email}</p>
+      <p>{useraccepted.order_detail1}</p>
+      <p>Service Provider:{useraccepted.order_detail2}</p>
+      <p>{useraccepted.order_detail1}</p>
+      <p>Service Provider:{useraccepted.order_detail2}</p>
+      </div> */}
    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -154,17 +167,9 @@ export const UserAcceptedList = (props) => {
           </Typography> */}
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-              <p>Order ID: {useraccepted.availability}</p>
-      <p>User ID: {useraccepted.price}</p>
-      <p>Provider Email: {useraccepted.provider_email}</p>
-      <p>Service Area: {useraccepted.provider_id}</p>
-      <p>Availability: {useraccepted.service_area}</p>
-      <p>Detail Time: {useraccepted.service_category}</p>
-      <p>Detail Address: {useraccepted.service_description}</p>
-      <p>Service Category: {useraccepted.service_id}</p>
+              {/* <Grid item xs={12} sm={6}> */}
       {/* <p>Service Description: {usercompletedlist.servicePhoto}</p> */}
-              </Grid>
+              {/* </Grid> */}
               <Grid item xs={12}>
                 {/* <TextField
                   required
@@ -272,6 +277,7 @@ export const UserAcceptedList = (props) => {
         {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
     </ThemeProvider>
+        </div>
         </div>
     )
 }

@@ -16,7 +16,7 @@ function RegisterValidation(user) {
     if(user.userPwd === "") {
         error.userPwd = "Password field cant be empty"
     } 
-    else if (user.userPwd.length < 3) {
+    else if (user.userPwd.length < 4) {
         error.userPwd = "Password needs atleast 4 charectors"
     }
    else {

@@ -20,7 +20,7 @@ import { Serviceslogo, Navbar, Servicenavbar} from './components';
 import { Footer, Blog, Features, Services, Header, Firstheader, Serviceheader } from './containers';
 import { Axios } from 'axios';
 import { ServiceProviderAddService } from './ServiceProviderAddService';
-import UserOrders from './components/UserOrders';
+import {UserOrders } from './components/UserOrders';
 import { UserCompletedList } from './components/UserCompletedList';
 import { UserAcceptedList } from './components/UserAcceptedList';
 import { ServiceProviderOrders } from './components/ServiceProviderOrders';
@@ -72,15 +72,12 @@ function App() {
             <div className="gradient__bg">
             <Navbar />
             <Serviceheader/>
-            <UserHomeSearch/>
+            
             </div>
+            <UserHomeSearch/>
             
             </>
           } />
-
-
-          <Route path="/userhomesearch" Component={UserHomeSearch}/>
-
 
 
           {/* NEED TO MAKE A PAGE THAT SHOWS THE RESULT OF SELECTED OPTIONS IN USER HOME 
@@ -100,8 +97,10 @@ function App() {
             </>
           } />
           <Route path="/userlogin" Component={UserLogin}/>
+
           <Route path="/adminlogin" Component={AdminLogin}/>
           <Route path="/serviceproviderlogin" Component={ServiceProviderLogin}/>
+
           {/* <Route path="serviceproviderhome" Component={ServiceProviderHome}/> */}
           <Route path="/serviceproviderhome" element={
             <>
@@ -117,14 +116,69 @@ function App() {
             <Footer />
             </>
           } />
-          <Route path="/servicerequestuserside" Component={ServiceRequestUserSide}/>
+
+          <Route path="/servicerequestuserside" element={
+            <>
+            <div className="gradient__bg">
+            <Navbar />
+            <ServiceRequestUserSide/>
+            </div>
+            
+            </>
+          } />
+
+
           <Route path="/userprofile" Component={UserProfile}/>
-          <Route path="/servicedetailsandchatuserside" Component={ServiceDetailAndChatUserSide}/>
+
+          <Route path="/servicedetailsandchatuserside" element={
+            <>
+            <div className="gradient__bg">
+            <Navbar />
+            <ServiceDetailAndChatUserSide/>
+            </div>
+            
+            </>
+          } />
+
+
           <Route path="/servicedetailsandchatserviceproviderside" Component={ServiceDetailAndChatServiceProviderSide}/>
           <Route path="/serviceprovideraddservice" Component={ServiceProviderAddService}/>
-          <Route path='/userorders' Component={UserOrders} />
-          <Route path="/usercompletedlist" Component={UserCompletedList}/>
-          <Route path="/useracceptedlist" Component={UserAcceptedList}/>
+
+
+          <Route path="/userorders" element={
+            <>
+            <div className="gradient__bg">
+            <Navbar />
+            <Firstheader/>
+            <UserOrders/>
+            </div>
+            
+            </>
+          } />
+
+          <Route path="/usercompletedlist" element={
+            <>
+            <div className="gradient__bg">
+            <Navbar />
+            <Firstheader/>
+            <UserCompletedList/>
+            </div>
+            
+            </>
+          } />
+
+          <Route path="/useracceptedlist" element={
+            <>
+            <div className="gradient__bg">
+            <Navbar />
+            <Firstheader/>
+            <UserAcceptedList/>
+            </div>
+            
+            </>
+          } />
+
+
           <Route path="/serviceproviderorders" Component={ServiceProviderOrders}/>
           <Route path="/providercompletedlist" Component={ProviderOrdersCompletedList}/>
           <Route path="/provideracceptedlist" Component={ProviderOrdersAcceptedList}/>

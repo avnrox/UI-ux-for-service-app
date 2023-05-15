@@ -73,6 +73,8 @@ export const UserRegister = () => {
           else{
             navigate('/userlogin')
           }
+          setError(RegisterValidation(user));
+          setUser({...user,[e.target.name]:e.target.value})
           // localStorage.setItem("user_name",response.data.user_name)
           // localStorage.setItem("user_email",response.data.user_email)
           // localStorage.setItem("user_mobile",response.data.user_mobile)
@@ -88,8 +90,8 @@ export const UserRegister = () => {
  
 
   const onInputChange  = (e) => {
+    setUser({...user,[e.target.name]:e.target.value})
     setError(RegisterValidation(user));
-      setUser({...user,[e.target.name]:e.target.value})
       const { name, value } = e.target;
       if (name === "userId") {
         setUser({
@@ -174,7 +176,7 @@ export const UserRegister = () => {
                   value={userPwd}
                   onChange={(e) => onInputChange(e)}
                 />
-                {errors.Pwd && <p style={{color: "red", fontSize: "13px" }}>{errors.Pwd}</p>}
+                {errors.userPwd && <p style={{color: "red", fontSize: "13px" }}>{errors.userPwd}</p>}
               </Grid>
               {/* <Grid item xs={12}>
                 <FormControlLabel

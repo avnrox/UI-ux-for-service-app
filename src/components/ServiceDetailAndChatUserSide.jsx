@@ -20,6 +20,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import Stack from '@mui/material/Stack';
 import { StepDescription } from "semantic-ui-react";
 import axios from "axios";
+import './servicerequestuserside.css';
+import Servicedetails from '../components/servicedetails/Servicedetails';
+import Article from '../components/article/Article';
+import { blog01, blog02, blog03, blog04, blog05 } from '../containers/blog/imports.js';
 
 
 
@@ -139,26 +143,37 @@ export const ServiceDetailAndChatUserSide = () => {
       // console.log("description" , description);
     const navigate = useNavigate();
     return (
+      <div className="seva__blog section__padding" id="blog">
+    <div className="seva__blog-heading">
+      <h1 className="gradient__text"> Service <br />Details</h1>
+    </div>
+    <div className="seva__blog-container">
+      <div className="seva__blog-container_groupA">
+        <Article imgUrl={blog01} date={searchserviceres.availability} text={searchserviceres.provider_email} text1 = {`Service:${searchserviceres.service_category}`}/>
+      </div>
+      <div className="seva__blog-container_groupB">
+      <Servicedetails text={`Order Status:${searchserviceres.order_status}`} text1={`Price: £${searchserviceres.price}`} score={`Adress:${searchserviceres.detail_add}`} />
+        <Servicedetails text = 'Description:' text1 = {searchserviceres.service_description} />
+        <Servicedetails text={`Your Comments:`} text1 = {`${searchserviceres.order_detail1}`} score={`${searchserviceres.order_detail3}`}/>
+        <Servicedetails text={`Service Provider Comments:`} text1={`${searchserviceres.order_detail2}`} score={`${searchserviceres.order_detail4}`}/>
+      </div>
+    </div>
+
+
+    
         <div>
+        {/* <div className="seva_chat">
            <p>Order ID: {searchserviceres.order_id}</p>
-      <p>User ID: {searchserviceres.user_id}</p>
-      <p>Provider Email: {searchserviceres.provider_email}</p>
-      <p>Service Area: {searchserviceres.service_area}</p>
-      <p>Availability: {searchserviceres.availability}</p>
-      <p>Detail Time: {searchserviceres.detail_time}</p>
-      <p>Detail Address: {searchserviceres.detail_add}</p>
-      <p>Service Category: {searchserviceres.service_category}</p>
-      <p>Service Description: {searchserviceres.service_description}</p>
-      <p>Price: {searchserviceres.price}</p>
-      <p>Order Time: {searchserviceres.order_time}</p>
       <p>Order Status: {searchserviceres.order_status}</p>
-      <p>Order detail coming from sp1: {searchserviceres.order_detail2}</p>
-      <p>Order detail coming from sp2: {searchserviceres.order_detail1}</p>
-      {/* <p>Verified: {orderState.verified ? 'Yes' : 'No'}</p> */}
+      <p>Messages/Requests from Service Provider: {searchserviceres.provider_email}</p>
+      <p>{searchserviceres.order_detail2}</p>
+      <p>{searchserviceres.order_detail1}</p>
+      </div> */}
    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <div >
         <Box
           sx={{
             marginTop: 8,
@@ -222,11 +237,15 @@ export const ServiceDetailAndChatUserSide = () => {
                   autoComplete="Description"
                 /> */}
                 <TextField
+                InputProps={{
+                  className: 'seva__header-content__input-textfield'
+                }
+              }
                 required
                 fullWidth
                 name="description"
                 id="outlined-multiline-static"
-                label="Description"
+                label="Message provider"
                 // value={"This is our chat like feature where user and service provider will add their comments. We need to fetch the older comments and provide this dialogue box for new comments addition. Fetch all data using IDs"}
                 multiline
                 rows={10}
@@ -292,7 +311,7 @@ export const ServiceDetailAndChatUserSide = () => {
             <Button variant="contained" color="success" onClick={handleSubmit}>
                 Submit
             </Button>
-            <Button color="secondary" onClick={handleWithdraw}>Withdraw</Button>
+            <Button variant="contained" color="secondary" onClick={handleWithdraw}>Withdraw</Button>
 
             {/* <Button variant="outlined" color="error">
              Error
@@ -301,8 +320,10 @@ export const ServiceDetailAndChatUserSide = () => {
           </Box>
         </Box>
         {/* <Copyright sx={{ mt: 5 }} /> */}
+        </div>
       </Container>
     </ThemeProvider>
+        </div>
         </div>
     )
 }
