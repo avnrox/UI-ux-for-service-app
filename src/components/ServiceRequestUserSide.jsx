@@ -42,13 +42,13 @@ export const ServiceRequestUserSide = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
           const user_id = localStorage.getItem('user_id');
-          const service_id = searchserviceres.serviceId;
+          const service_id = searchserviceres.service_id;
           const detail_time = startDate;
           const order_detail = description;
-          console.log("data inside submit from localstorage",user_id,service_id,detail_time,order_detail);
+          console.log("data inside submit from localstorage",user_id,service_id,detail_time,order_detail, selectedArea);
 
           
-          await axios.post('http://localhost:8082/order/user_request?user_id='+user_id+'&service_id='+service_id+'&detail_time='+detail_time+'&order_detail1='+order_detail)
+          await axios.post('http://localhost:8082/order/user_request?user_id='+user_id+'&service_id='+service_id+'&detail_time='+detail_time+'&order_detail1='+order_detail+'&detail_add='+selectedArea)
           .then((response) => {
             console.log(response.data);
             // setRes(response.data);
@@ -226,6 +226,7 @@ export const ServiceRequestUserSide = () => {
                 label="Destination Address"
                 multiline
                 rows={4}
+                value={selectedArea}
                 onChange={(e) => setSelectedArea(e.target.value)}
                 />
               </Grid>
