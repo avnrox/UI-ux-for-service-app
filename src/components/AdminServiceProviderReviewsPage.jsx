@@ -9,6 +9,7 @@ function AdminServiceProviderReviewsPage() {
     axios.get('http://localhost:8082/serviceprovider/get_verified_provider_list')
       .then(response => {
         setProviders(response.data);
+        // console.log(providers);
       });
   }, []);
 
@@ -18,9 +19,12 @@ function AdminServiceProviderReviewsPage() {
         console.log(response.data)
         if (response.data === 1) {
           setProviders(providers.map(provider => provider.providerId === providerId ? { ...provider, verified: 1 } : provider));
+          
         }
       });
   };
+
+  console.log(providers);
 
   return (
     <Container>
@@ -36,6 +40,11 @@ function AdminServiceProviderReviewsPage() {
             <Box sx={{ mt: 1 }}>
               <Typography variant="body2" color="text.secondary" component="p">
                 Verified: {provider.verified ? 'Yes' : 'No'}
+              </Typography>
+            </Box>
+            <Box sx={{ mt: 1 }}>
+              <Typography variant="body2" color="text.secondary" component="p">
+                Average Score: {provider.avgScore}
               </Typography>
             </Box>
           </CardContent>
