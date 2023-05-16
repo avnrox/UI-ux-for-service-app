@@ -5,27 +5,26 @@ import './footer.css';
 const Footer = () => (
   <div className="seva__footer section__padding">
     <div className="seva__footer-heading">
-      <h1 className="gradient__text">Do you want to step in to the future before others</h1>
+      <h1 className="gradient__text">Right Services - Right Places - Right Time</h1>
     </div>
 
     <div className="seva__footer-btn">
-      <p>Early Access</p>
+      <p>COMP 6251 - Beta v4.20</p>
     </div>
 
     <div className="seva__footer-links">
       <div className="seva__footer-links_logo">
         <img src={sevaLogo} alt="seva_logo" />
-        <p>sldfjksldfkj sldkfj dsflj <br /> All Rights Reserved</p>
+        <p>Web devlopment and cloud coursework. <br /> "cogito, ergo sum" - I think , Therefore I am. <br /> All right to this belong to us. <br /> I will find you and sue you. </p>
       </div>
       <div className="seva__footer-links_div">
-        <h4>Links</h4>
-        <p>Overons</p>
+        <h4>My Links Here</h4>
+        <p>Instagram</p>
         <p>Social Media</p>
-        <p>Counters</p>
         <p>Contact</p>
       </div>
       <div className="seva__footer-links_div">
-        <h4>Company</h4>
+        <h4> Seva Company</h4>
         <p>Terms & Conditions </p>
         <p>Privacy Policy</p>
         <p>Contact</p>
@@ -33,13 +32,13 @@ const Footer = () => (
       <div className="seva__footer-links_div">
         <h4>Get in touch</h4>
         <p>Mayflower forest in concrete</p>
-        <p>12313131123</p>
-        <p>email</p>
+        <p>1234567890</p>
+        <p>email@hotmail.com</p>
       </div>
     </div>
 
     <div className="seva__footer-copyright">
-      <p>Shhhhh some is watching you.</p>
+      <p>Web dev and cloud .</p>
     </div>
   </div>
 );

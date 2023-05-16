@@ -4,28 +4,36 @@ import './features.css';
 /*orders from data base*/
 const featuresData = [
   {
-    title: 'Babby sitting',/*service name and discription */
-    text: 'abc xyz ordered for whole day',
+    title: 'Baby sitting',/*service name and discription */
+    text: 'Ensuring your babys safty',
   },
   {
     title: 'Electrical raepair',
-    text: 'Instalation of celling fan unit.',
+    text: 'If electricity runs in it , we can fix it',
   },
   {
     title: 'Plumbing',
-    text: 'Finding the leak in pipeline and fixing',
+    text: 'Water leaks or fitting lines we strive to satisfy',
   },
   {
     title: 'Beauty',
-    text: 'Facial and rejuvinating face massage',
+    text: 'Helping you feel more confident than yesterday',
+  },
+  {
+    title: 'Cleaning',/*service name and discription */
+    text: 'Making your floors shine better than your future',
+  },
+  {
+    title: 'Pest Control',/*service name and discription */
+    text: 'Safe and eviornmental friendly pest contol servies',
   },
 ];
 
 const Features = () => (
   <div className="seva__features section__padding" id="features">
     <div className="seva__features-heading">
-      <h1 className="gradient__text">Your Past Used Services From Our Portal.</h1>
-      <p>view full order history</p>
+      <h1 className="gradient__text">All Servies Provided By Us.</h1>
+      {/* <p href="#home">Search Order</p> */}
     </div>
     <div className="seva__features-container">
       {featuresData.map((item, index) => (

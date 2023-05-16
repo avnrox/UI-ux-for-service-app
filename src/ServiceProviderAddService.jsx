@@ -61,6 +61,7 @@ export const ServiceProviderAddService = () => {
       const handleOnClick = async (e) => {
         e.preventDefault();
         console.log("data : ", service); 
+        try{
         await axios.post("http://localhost:8082/service/save?", service)
         .then((response) => {
           console.log(response.data)
@@ -74,12 +75,16 @@ export const ServiceProviderAddService = () => {
           // localStorage.setItem("user_status",response.data.user_status)
           // localStorage.setItem("user_created_at",response.data.user_created_at)
           // localStorage.setItem("user_updated_at",response.data.user_updated_at)
+          
         
         })
         navigate('/serviceproviderhome');
-        
-        };
+      } catch (error) {
+        navigate('/serviceprovideraddservice')
 
+      }
+        };
+        
         const areas = [
           {
             id: 1,
@@ -154,6 +159,13 @@ export const ServiceProviderAddService = () => {
       const { name, value } = e.target;
       console.log("test", name, value);
       setService({ ...service, [name]: value });
+    };
+
+    const onInputCheck = (e) => {
+      const { name, value } = e.target;
+      console.log("Inpustcheck", name, value);
+      const cleanedvalue = value.replace(/[^0-9]/g, '');
+      setService({ ...service, [name]: cleanedvalue });
     };
 
     // const getData = async (e) => {
@@ -242,11 +254,12 @@ export const ServiceProviderAddService = () => {
                   id="price"
                   autoComplete="prices"
                   value={price}
-                  onChange={(e) => onInputChange(e)}
+                  onInput={(e) => onInputCheck(e)}
+                  // onChange={(e) => onInputChange(e)}
                 />
                 </Grid>
                   <div className="seva__header-content__input">
-                <select name="serviceArea" value={serviceArea} onChange={onInputChange}>
+                <select name="serviceArea" value={serviceArea} onChange={onInputChange} required>
   {areas.map((area) => (
     <option key={area.id} value={area.name}>
       {area.name}
@@ -255,7 +268,7 @@ export const ServiceProviderAddService = () => {
 </select>
 
 
-<select name="serviceCategory" value={serviceCategory} onChange={onInputChange}>
+<select name="serviceCategory" value={serviceCategory} onChange={onInputChange} required>
   {categories.map((category) => (
     <option key={category.id} value={category.name}>
       {category.name}

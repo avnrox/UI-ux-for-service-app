@@ -5,13 +5,13 @@ import './services.css';
 const Services = () => (
   <div className="seva__services section__margin" id="wseva">
     <div className="seva__services-heading">
-      <h1 className="gradient__text">Scouting Services that justify your needs</h1>
-      <p>View more comments</p>
+      <h1 className="gradient__text">Satisfying Customers Since 2023</h1>
+      <p> &lt;3 </p>
     </div>
     <div className="seva__services-container">
-      <Orders title="Babby Sitting" text="Due to the inflation all members of our family had to start working to keep the house running, babby sitting service provided by a local company helped us not worry about our babby while at work" />
-      <Orders title="Pest Control" text="blah blah blah asdkja asjdha kjans djkahd andabndia kna idhas naisjh asid nhauidh aid nadihui hadnai duhai nasiudha dajd nasidh" />
-      <Orders title="Beuty" text="puggdsfn ashdba jhdka dasjjdk hadkjs ad ahsdjk ha dasjah djka ajhsdhg ajkd abaiudh ada" />
+      <Orders title="Arjun V Nair" text="I was one of the lucky few to get early access to this very helpfull app. After moving to UK io could not figure out how to get anyhting done , thats when this app came into my life. thank you devolopers" />
+      <Orders title="Siddharth Raut" text="I was in tears when i saw this beutiful User Interface, I couldnt belive we could have such beaty with all these great features. My eyes are happy " />
+      <Orders title="Tracy" text="This app saved my life, i couldnt find any services around me to fix my light. Using this app was very simple and straight forward" />
     </div>
   </div>
 );

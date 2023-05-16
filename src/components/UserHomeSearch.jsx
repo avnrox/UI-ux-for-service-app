@@ -434,7 +434,7 @@ export const UserHomeSearch = () => {
   //   ))}
   // </ul>
   <div className='products'>
-    <button style= {{opacity:100}} onClick={gettempdata}>Fetch Services</button>
+    <button style= {{opacity:100}} onClick={gettempdata}>Find Services</button>
               {res.length > 0 &&
   <ul style={{ color: 'white', display: "inline" }}>
     {res.map(item => (
@@ -454,7 +454,7 @@ export const UserHomeSearch = () => {
           <p>{item.score}</p>
           </div> */}
           <div className="seva__blog-container_groupB">
-          <Article imgUrl={blog02} text={item.provider_id} text1={`Availability:${item.availability}`} text2={`Price:${item.price}`} score={`Average Rating:${item.score}`} reviews={item.content}/>
+          <Article imgUrl={blog01} date={`Availability:${item.availability}`} text={item.provider_id} text1={`Price:${item.price}`} score={`Average Rating:${item.score}`} reviews={item.content}/>
           {/* <Article imgUrl={blog03} date={item.providerId} text={`Availability: ${item.availability}`}/> */}
           {/* <Article imgUrl={blog04} date={item.providerId} text="sdfjhagskjdfhsjkf sdkhfjksdhf jkshfk jshdfkjs hfjk" />
           <Article imgUrl={blog05} date={item.providerId} text="sdhfgshjdfhgsjk sdkjhfjksah fjksdfjk hsdjkfh sjkfh kjasfhkj" /> */}
