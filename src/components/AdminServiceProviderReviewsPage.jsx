@@ -21,6 +21,10 @@ function AdminServiceProviderReviewsPage() {
           setProviders(providers.map(provider => provider.providerId === providerId ? { ...provider, verified: 1 } : provider));
           
         }
+      }).catch((error) => {
+        console.log(error);
+        window.alert("Error, this Provider is active, please wait till he completes his orders");
+      
       });
   };
 
