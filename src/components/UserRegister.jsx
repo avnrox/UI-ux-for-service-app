@@ -16,6 +16,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
 import RegisterValidation from './RegisterValidation';
+import emailjs from 'emailjs-com'
+import apiKeys from './apiKeys'
+
 
 function Copyright(props) {
   return (
@@ -30,6 +33,17 @@ function Copyright(props) {
   );
 }
 
+function sendEmail(e) {
+   e.preventDefault();
+    console.log("test", e);
+   emailjs.sendForm("service_8c89192", apiKeys.TEMPLATE_ID, e.target, apiKeys.USER_ID)
+   .then((result) => {
+   console.log(result.text);
+   }, (error) => {
+   console.log(error.text);
+   });
+  }
+
 const theme = createTheme();
 
 export const UserRegister = () => {
@@ -40,7 +54,25 @@ export const UserRegister = () => {
     email:"",
     confirmPwd: "",
   })
-  const [errors, setError] = useState({})
+  const [OTP, setOTP] = useState([]); 
+
+  const [topic, settempusername] = useState([]);
+  const [to, settempuseremail] = useState([]);
+  const [message, settemptext] = useState([]);
+
+  const handletempusernameChange = (event) => {
+    settempusername(event.target.value);
+  };
+  const handletempuseremailChange = (event) => {
+    settempuseremail(event.target.value);
+  };
+  const handletemputextChange = (event) => {
+    settemptext(event.target.value);
+  };
+
+
+
+   const [errors, setError] = useState({})
   const valdn = errors.userId;
   const valdp = errors.userPwd;
 
@@ -50,6 +82,20 @@ export const UserRegister = () => {
   const onConfirmPwdChange = (e) => {
     setUser({ ...user, confirmPwd: e.target.value });
   };
+
+  const handleOTPChange = (event) => {
+    setOTP(event.target.value);
+  };
+
+  // const [message, setMessage] = useState('');
+  // const [randomNumber, setRandomNumber] = useState(0);
+
+    // const handlete = () => {
+    const newRandomNumber = Math.floor(Math.random() * 100) + 1;
+  //   setRandomNumber(newRandomNumber);
+  //   setMessage(String(newRandomNumber));
+  // };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,7 +164,7 @@ export const UserRegister = () => {
 
   }
 
-  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -201,6 +247,7 @@ export const UserRegister = () => {
     onChange={onConfirmPwdChange}
   />
 </Grid>
+
             </Grid>
             <Button
               type="submit"
@@ -210,17 +257,13 @@ export const UserRegister = () => {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/UserLogin" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
+           
           </Box>
         </Box>
+      
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
+    
   );
 }

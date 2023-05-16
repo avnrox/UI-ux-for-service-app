@@ -32,6 +32,7 @@ import ServiceProviderPage from './components/AdminNewServiceProviderPage';
 import ServiceProviderReviewsPage from './components/AdminServiceProviderReviewsPage';
 import { AdminLogin } from './components/AdminLogin';
 import { ServiceProviderVerification } from './components/ServiceProviderVerification';
+import { UserRegisterVerifyEmail } from './components/UserRegisterVerifyEmail';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
             </>
           } />
           <Route path="/home" Component={Home} /> 
+          <Route path="/userregisterverify" Component={UserRegisterVerifyEmail} />
           <Route path="/userregister" Component={UserRegister} />
           <Route path="/serviceproviderregister" Component={ServiceProviderRegister}/>
 

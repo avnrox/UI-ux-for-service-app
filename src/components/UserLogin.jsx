@@ -188,7 +188,7 @@ export const UserLogin = () => {
                   </Link>
                 </Grid> */}
                 <Grid item>
-                  <Link href="UserRegister/" variant="body2">
+                  <Link href="userregisterverify/" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
