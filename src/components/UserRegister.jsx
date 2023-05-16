@@ -107,7 +107,8 @@ export const UserRegister = () => {
     if ( valdn === "Cant be empty" || 
       valdn === "Invalid email-id entered" || 
       valdp === "Password field cant be empty" ||
-      valdp === "Password needs atleast 4 charectors"){
+      valdp === "Password needs atleast 4 charectors"||
+      valdn === "User already exisits!' "){
         //stop navigation.
       }
       else if (user.userPwd !== user.confirmPwd){
@@ -124,6 +125,7 @@ export const UserRegister = () => {
           console.log("user_id",localStorage.getItem("user_id"))
           if (response.data === "user does exist!"){
             errors.userId = "User already exisits!"
+            window.alert("User already exisits!" )
             setUser({...user,[e.target.name]:e.target.value})//to show user exisists
           }
           else{

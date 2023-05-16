@@ -95,10 +95,11 @@ export const ServiceDetailAndChatServiceProviderSide = () => {
     </div>
     <div className="seva__blog-container">
       <div className="seva__blog-container_groupA">
+      
         <Article imgUrl={blog01} text={`User: ${spchat.user_id}`} text1 = {`Service: ${spchat.service_category}`}/>
       </div>
       <div className="seva__blog-container_groupB">
-      <Servicedetails text={`Order Status:${spchat.order_status}`} text1={`Price: £${spchat.price}`} score={`Adress:${spchat.detail_add}`} />
+      <Servicedetails date={`Date: ${spchat.detail_time}`} text={`Order Status:${spchat.order_status}`} text1={`Price: £${spchat.price}`} score={`Adress:${spchat.detail_add}`} />
         <Servicedetails text = 'Description:' text1 = {spchat.service_description} />
         <Servicedetails text={`Customer Comments:`} text1 = {order_det1} score={order_det3}/>
         <Servicedetails text={`Your Comments:`} text1={order_det2} score={order_det4}/>

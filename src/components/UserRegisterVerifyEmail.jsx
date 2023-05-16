@@ -97,6 +97,8 @@ export const UserRegisterVerifyEmail = () => {
 console.log("Type of parsedOTP:", typeof parsedOTP);
         if (!isNaN(parsedOTP) && parsedOTP === newRandomNumber) {
           console.log("OTP is correct");
+          localStorage.setItem("userverifyemail", to);
+          console.log("to email",localStorage.getItem("userverifyemail"));
           navigate('/userregister');
         } else {
           console.log("OTP is incorrect");
