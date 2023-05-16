@@ -290,8 +290,8 @@ export const ServiceProviderAddService = () => {
             <Button variant="contained" color="success"  onClick={handleOnClick}>
                 Submit
             </Button>
-            <Button variant="contained" color="success">Accept</Button>
-            <Button variant="contained" color="secondary">Reject</Button>
+            {/* <Button variant="contained" color="success">Accept</Button>
+            <Button variant="contained" color="secondary">Reject</Button> */}
 
         </Stack>
           </Box>
