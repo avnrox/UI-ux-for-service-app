@@ -86,7 +86,8 @@ export const ServiceProviderOrders = () => {
           }}
           style={{ color: 'white' }}
         >
-          <h3>{item.provider_id}</h3>
+          <h3>{item.service_category}</h3>
+          <p>{item.user_id}</p>
           {/* <p>{item.description}</p> */}
           {/* <ul>
             {item.reviews.map(review => (
@@ -117,7 +118,8 @@ export const ServiceProviderOrders = () => {
           }}
           style={{ color: 'white' }}
         >
-          <h3>{item.provider_id}</h3>
+          <h3>{item.service_category}</h3>
+          <p>{item.user_id}</p>
           {/* <p>{item.description}</p> */}
           {/* <ul>
             {item.reviews.map(review => (

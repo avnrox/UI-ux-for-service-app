@@ -43,7 +43,8 @@ export  const Serviceproviderheader = () => {
                 }}
                 style={{ color: 'white' }}
               >
-                <h3>{item.user_id}</h3>
+                <h3>{item.service_category}</h3>
+          <p>{item.user_id}</p>
               </li>
             </Link>
           ))}
